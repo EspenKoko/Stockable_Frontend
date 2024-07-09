@@ -1,0 +1,42 @@
+<div class="card-body">
+    <br>
+    <div class="viewPageBody bg-light" >
+      <br>
+      <h2 class="lblHeader2 card-title">Assign Printer</h2>
+  
+      <form class="inputTableContainter" [formGroup]="assignPrinterForm">
+        <table class="CRUDTable table table-borderless">
+            <tr scope="row">
+                <td class="lblInputLabel">Serial Number:</td>
+                <td>
+                    <input matInput formControlName="serialNumber" type="text" required>
+                </td>
+              </tr>  
+          <tr scope="row">
+            <td class="lblInputLabel">Printer Model:</td>
+            <td>
+                <input value="{{printerModel}}" type="text" readonly>
+            </td>
+          </tr>
+          <tr scope="row">
+            <td class="lblInputLabel">Client:</td>
+            <td>
+                <input value="{{clientName}}" type="text" readonly>
+            </td>
+          </tr>
+        </table>
+  
+        <div class="buttonGroup">
+          <button class="btnFormReturn" (click)="back()">
+            <p class="btnReturnText">Return</p>
+          </button>
+  
+          <button class="btnFormSubmit" (click)="assign()">
+            <p class="btnSubmitText">Assign</p>
+          </button>
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,74 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">Printers Owned</h2>
+    <br>
+    <!-- search funtions will need to be changed accordingly based on the type and name of componant -->
+    <div class="headerSection row">
+        <label class="lblInputLabel col-5" for="searchCriteria">Serial Number:</label>
+        <div class="searchBoxContainter col-7">
+            <input type="text" class="inputSearchBox" placeholder="Enter Serial Number" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="GetPrinter()">
+        </div>
+    </div>
+    <br>
+
+    <!-- modify table headers and rows accordingly -->
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <!-- <th scope="col" style="width: 4%;">#</th> -->
+                    <th scope="col" (click)="sortTable('name')">Serial Number</th>
+                    <th scope="col" (click)="sortTable('printerStatus')">Status</th>
+                    <th scope="col" (click)="sortTable('model')">Model</th>
+                    <!-- <th scope="col"></th> -->
+                </tr>
+            </thead>
+            <!-- rows for when api is connected and there is data being sent through successfully -->
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <!-- <td>{{i+1}}</td> -->
+                    <td>{{attribute.serialNumber}}</td>
+                    <td>{{attribute.printerStatus.printerStatusName}}</td>
+                    <td>{{attribute.printerModel}}</td>
+                    <!-- <td><button class="btn btn-danger" (click)="Delete(attribute.printerId)">Derigester</button></td> -->
+                </tr>
+            </tbody>
+            <!-- default row when no data in api or api is not connected -->
+            <tr *ngIf="!data || data.length == 0">
+                <!-- <td>#</td> -->
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <!-- <td><button class="btn btn-danger" disabled="disabled">Derigester</button></td> -->
+            </tr>
+        </table>
+        <button type="button" class="btnToolHelp" matTooltip="Printers registered or bought from ACS will show up in the above table.
+            Users can register their own printers view the 'Assign printer' button.
+            the user can also view the status of error logged printers view the error log statuses."
+            [matTooltipPosition]="'right'" [matTooltipShowDelay]="500" [matTooltipHideDelay]="1000"
+            aria-label="Tooltip for help on client printers">
+            <P class="btnToolHelpPara">&#63;</P>
+        </button>
+    </div>
+
+    <!-- this container is always for return and back button -->
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer"
+        *ngIf="service.getUserRoles().includes('CLIENT_ADMIN') || service.getUserRoles().includes('SUPER_ADMIN')">
+        <button class="btnSecondary" routerLink="/assign-branch-printer">
+            <P class="btnSubmitText">Assign printer</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" routerLink="/view-errorlog-statuses">
+            <P class="btnSubmitText">Error Log statuses</P>
+        </button>
+    </div>
+</div>

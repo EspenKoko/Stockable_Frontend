@@ -1,0 +1,55 @@
+<body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="content">
+        <h1 class="lblHeader2 card-title">Dashboard</h1>
+        <br>
+        <div class="lblHeader3">
+            <div class="iconContainer">
+                <mat-icon class="printerIcon"
+                    matTooltip="Welcome to the dashboard. click the printer icon to see details of your printer."
+                    [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" [matTooltipHideDelay]="1000"
+                    aria-label="Tooltip for help on dashboard" (click)="openPrinterInfoDialog()">printer</mat-icon>
+            </div>
+            <h1>{{serialNumber}}</h1>
+            <p>{{printerStatus}}</p>
+        </div>
+        <br>
+
+        <div class="buttonGroup btn-group-vertical">
+            <div class="btnMenuItemContainer">
+                <button class="btnMenuItem" routerLink="/log-error" [disabled]="printerStatus === 'Error'">
+                    <span class="btnMenuText">Log error</span>
+                </button>
+            </div>
+            <div class="btnMenuItemContainer">
+                <button class="btnMenuItem" routerLink="/acs-store">
+                    <span class="btnMenuText">ACS Store</span>
+                </button>
+            </div>
+
+            <br>
+            <!-- below is used for master admin -->
+            <div class="btnMenuItemContainer"
+                *ngIf="service.getUserRoles().includes('CLIENT_ADMIN') || service.getUserRoles().includes('SUPER_ADMIN')">
+                <button class="btnMenuItem" routerLink="/user-registration">
+                    <span class="btnMenuText">Register New User</span>
+                </button>
+            </div>
+
+            <br>
+            <!-- seen by super admin -->
+            <div class="btnMenuItemContainer" *ngIf="service.getUserRoles().includes('SUPER_ADMIN')">
+                <button class="btnMenuItem" routerLink="/client-financials">
+                    <span class="btnMenuText">Financials</span>
+                </button>
+            </div>
+            <div class="btnMenuItemContainer" *ngIf="service.getUserRoles().includes('SUPER_ADMIN')">
+                <button class="btnMenuItem" routerLink="/client-printers">
+                    <span class="btnMenuText">printer</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,119 @@
+<!-- <div class="viewPageBody"> -->
+<br>
+<h2 class="lblHeader2 card-title">Parts Requests</h2>
+<br>
+
+<div class="dashboard container-fluid">
+
+    <div class="row justify-content-md-center">
+        <div class="dashboardTab col-md-8">
+            <div class="centerContainer">
+                <div class="headerSection row">
+                    <div class="searchBoxContainter col-12">
+                        <input type="text" class="inputSearchBox" placeholder="Enter Part Name" [(ngModel)]="searchTerm"
+                            name="searchCriteria" (keyup)="getPart()">
+                    </div>
+                </div>
+                <br>
+                <div class="nonViewTableContainer">
+                    <table class="nonViewTable table table-striped table-light">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" style="width: 4%;">#</th>
+                                <th scope="col">Part Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="stockData && stockData.length > 0">
+                            <tr scope="row" *ngFor="let attribute of stockData, let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{attribute.stockName}}</td>
+                                <td>{{attribute.stockDescription}}</td>
+                                <td><button class="btn btn-primary" type="button"
+                                        (click)="addPart(attribute)">Add</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tr *ngIf="!stockData || stockData.length == 0">
+                            <td>#</td>
+                            <td>No Data</td>
+                            <td>No Data</td>
+                            <td><button class="btn btn-primary">Add</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="dashboardTab col">
+            <div class="centerContiner">
+                <h4 class="lblHeader2">Date: {{ date | date: 'dd/MM/yyyy' }}</h4>
+                <br>
+                <br>
+                <h5 class="lblHeader2">Printer: {{data?.assignedPrinter.serialNumber}}</h5>
+                <br>
+                <h5 class="lblHeader2">Client: {{data?.assignedPrinter.client.clientName}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="dashboardTab col-md-8">
+            <div class="centerContainer">
+                <h2 class="lblHeader2 card-title">Summary</h2>
+                <br>
+                <div class="nonViewTableContainer">
+                    <table class="nonViewTable table table-striped table-light">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" style="width: 4%;">#</th>
+                                <th scope="col">Part Id</th>
+                                <th scope="col">Part name</th>
+                                <th scope="col">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="partsList && partsList.length > 0">
+                            <tr scope="row" *ngFor="let attribute of partsList, let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{attribute.stockId}}</td>
+                                <td>{{attribute.stockName}}</td>
+                                <td
+                                    style="display: flex; flex-direction:row; text-align: center; justify-content: center;">
+                                    <mat-icon class="increase" (click)="removePart(attribute)">chevron_left</mat-icon>
+                                    {{attribute.quantity}}
+                                    <mat-icon class="decrease" (click)="addPart(attribute)">chevron_right</mat-icon>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tr *ngIf="!partsList || partsList.length == 0">
+                            <td>#</td>
+                            <td>No Data</td>
+                            <td>No Data</td>
+                            <td>No Data</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="dashboardTab col">
+            <div class="centerContainer">
+                <h5 class="lblHeader2">Estimated time for repair</h5>
+                <br>
+                <label for="time"><input type="number" min="1" name="time"  [(ngModel)]="repairTime"> Hour(s)</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="btnReturnContainer">
+    <button class="btnReturn" (click)="back()">
+        <P class="btnReturnText">Return</P>
+    </button>
+</div> -->
+
+<div class="btnSubmitContainer">
+    <button class="btnSubmit" (click)="requestParts()">
+        <P class="btnSubmitText">Request parts</P>
+    </button>
+</div>
+<!-- </div> -->

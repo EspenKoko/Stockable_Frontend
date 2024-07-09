@@ -1,0 +1,69 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">{{title}} Requests</h2>
+    <br>
+
+    <!-- modify table headers and rows accordingly -->
+    <div class="viewTableContainer">
+        <table class="viewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Branch</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <!-- rows for when api is connectedd and there is data being sent through successfully -->
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.name}}</td>
+                    <td>{{attribute.surname}}</td>
+                    <td>{{attribute.number}}</td>
+                    <td>{{attribute.email}}</td>
+                    <td>{{attribute.role}}</td>
+                    <td>{{attribute.clientUserPosition}}</td>
+                    <td>{{attribute.branch.client.clientName}}</td>
+                    <td>{{attribute.branch.branchName}}</td>
+                    <td *ngIf="!attribute.userCreated"><button class="btn btn-primary"
+                            (click)="register(attribute)">Create User</button></td>
+                    <td *ngIf="attribute.userCreated"><button class="btn btn-primary" disabled>Already Exists</button>
+                    </td>
+                    <!-- <td><button class="btn btn-danger" (click)="Delete(attribute.clientUserId)">{{deleteText}}</button></td> -->
+                    <td><button class="btn btn-danger"
+                            (click)="toggleConfirmButton(i, attribute.clientUserRequestId)">{{attribute.confirmButton ?
+                            'Confirm' : 'Delete'}}</button></td>
+                </tr>
+            </tbody>
+            <!-- default row when no data in api or api is not connected -->
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled type="button">Create User</button></td>
+                <td><button class="btn btn-danger" disabled="disabled">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- this container is always for return and back button -->
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</div>

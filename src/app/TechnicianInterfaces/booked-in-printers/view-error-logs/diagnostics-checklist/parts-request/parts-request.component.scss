@@ -1,0 +1,62 @@
+  .dashboardTab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      margin: 1% 1% 1% 1%;
+      padding: 1% 0% 1% 0%;
+      color: white;
+  }
+
+  // ##########
+
+  .nonViewTableContainer {
+      width: 80%;
+      max-height: 250px;
+  }
+
+  .nonViewTable thead tr th:last-child,
+  .nonViewTable thead tr td:last-child {
+      width: 100px;
+  }
+
+  .nonViewTable thead tr th:nth-last-child(2),
+  .nonViewTable thead tr td:nth-last-child(2) {
+      // width: max(35px, 7%);
+      width: auto;
+  }
+
+  input[type="number"] {
+      width: 50px;
+  }
+
+  .iconContainer {
+      padding-left: 25px;
+  }
+
+  .removePart {
+      font-size: xx-large;
+      width: auto;
+      height: auto;
+      transition: 0.5;
+  }
+
+  .removePart:hover {
+      color: rgb(68, 68, 68);
+      cursor: pointer;
+  }
+
+  .increase,
+  .decrease {
+      color: goldenrod;
+      height: auto;
+      width: auto;
+      transition: .5s;
+  }
+
+  .increase:hover,
+  .decrease:hover {
+      color: gold;
+      cursor: pointer;
+  }

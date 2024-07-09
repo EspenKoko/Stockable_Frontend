@@ -1,0 +1,40 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">Booked In Printers</h2>
+    <br>
+    
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Seriel Number</th>
+                    <th scope="col">Date Booked In</th>
+                    <th scope="col">Client</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.errorLog.assignedPrinter.serialNumber}}</td>
+                    <td>{{attribute.errorLog.errorLogDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{attribute.errorLog.clientUser.client.clientName}}</td>
+                    <td><button class="btn btn-primary" type="button"
+                            [routerLink]="['/technician-error-logs', attribute.errorLogId]">View Error Log</button></td>
+            </tr>
+            </tbody>
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled type="button" routerLink="/technician-error-logs" disabled>Assess</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>

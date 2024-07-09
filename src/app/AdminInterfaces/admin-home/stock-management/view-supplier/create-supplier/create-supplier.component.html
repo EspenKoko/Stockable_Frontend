@@ -1,0 +1,80 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="addForm" (ngSubmit)="Add()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Name:</td>
+                    <td><input type="text" #name required name="name"
+                            formControlName="supplierName"></td>
+                </tr>
+                <tr *ngIf="addForm.get('supplierName')?.dirty && addForm.get('supplierName')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please enter a valid name.</td>
+                </tr>
+                <tr *ngIf="addForm.get('supplierName')?.touched && addForm.get('supplierName')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain special characters.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Email:</td>
+                    <td><input class="inputNumberSelecter" type="email" #email required name="email" required
+                            formControlName="supplierEmail">
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('supplierEmail')?.touched && addForm.get('supplierEmail')?.hasError('required')"
+                    class="errorMsg">
+                    <td></td>
+                    <td>Field cannot be empty</td>
+                </tr>
+                <tr *ngIf="addForm.get('supplierEmail')?.touched && addForm.get('supplierEmail')?.hasError('email')"
+                    class="errorMsg">
+                    <td></td>
+                    <td>Invalid email address</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Number:</td>
+                    <td><input class="inputNumberSelecter" type="text" #number required name="number" required
+                            formControlName="supplierContactNumber">
+                    </td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('supplierContactNumber')?.touched && addForm.get('supplierContactNumber')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty</td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('supplierContactNumber')?.touched && addForm.get('supplierContactNumber')?.hasError('pattern')">
+                    <td></td>
+                    <td class="errorMsg">Please enter a valid 10-digit number with 0 as the starting digit.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Address:</td>
+                    <td><textarea class="inputNumberSelecter" name="address" #address required required
+                            formControlName="supplierAddress"></textarea>
+                    </td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('supplierAddress')?.dirty && addForm.get('supplierAddress')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please enter a valid address.</td>
+                </tr>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!addForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

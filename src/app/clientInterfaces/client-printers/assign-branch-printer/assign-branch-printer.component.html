@@ -1,0 +1,43 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Update {{branchname}}
+            <button type="button" class="btnToolHelp" matTooltip="Add a printer to this branch"
+                [matTooltipPosition]="'after'" [matTooltipShowDelay]="500" [matTooltipHideDelay]="1000"
+                aria-label="Tooltip for help in user registration">
+                <P class="btnToolHelpPara">&#63;</P>
+            </button>
+        </h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="updateForm">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel" for="SelectList">Printer:</td>
+                    <td>
+                        <select name="selectClient" class="inputSelectBox" formControlName="assignedPrinterId" required [(ngModel)]="selectedPrinterId">
+                            <option *ngIf="!printerData || printerData.length == 0" [value]="'default'" disabled>There are no printers in float</option>
+                            <option *ngIf="printerData && printerData.length > 0" value="" required>Select a float printer </option>
+                            <option *ngFor="let attribute of printerData" [value]="attribute.assignedPrinterId">{{ attribute.serialNumber }}</option>
+                        </select>
+                        <span class="requiredField">*</span>
+                    </td>
+                </tr>
+                <tr
+                    *ngIf="updateForm.get('assignedPrinterId')?.touched && updateForm.get('assignedPrinterId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please select an printer</td>
+                </tr>
+            </table>
+            <div class="buttonGroup">
+                <button class="btnFormReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+
+                <button class="btnFormSubmit" (click)="updateBranch(selectedPrinterId)" [disabled]="!updateForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

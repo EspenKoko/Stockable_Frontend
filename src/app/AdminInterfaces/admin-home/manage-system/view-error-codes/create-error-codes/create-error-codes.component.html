@@ -1,0 +1,55 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="addForm" (ngSubmit)="Add()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Error Code:</td>
+                    <td><input type="text" name="type" formControlName="errorCodeName" #type
+                            required></td>
+                </tr>
+                <tr *ngIf="addForm.get('errorCodeName')?.touched && addForm.get('errorCodeName')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('errorCodeName')?.touched && addForm.get('errorCodeName')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain special characters.</td>
+                </tr>
+                <!-- <tr *ngIf="addForm.get('errorCodeName')?.touched && addForm.get('errorCodeName')?.hasError('pattern')">
+                    <td></td>
+                    <td class="errorMsg">Error code should contain: <br /> ... </td>
+                </tr> -->
+                <tr scope="row">
+                    <td class="lblInputLabel">Error Description:</td>
+                    <td><textarea name="description" formControlName="errorCodeDescription"
+                            #description required></textarea></td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('errorCodeDescription')?.touched && addForm.get('errorCodeDescription')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('errorCodeDescription')?.touched && addForm.get('errorCodeDescription')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain special characters.</td>
+                </tr>
+            </table>
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!addForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>

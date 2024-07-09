@@ -1,0 +1,78 @@
+<div class="centerContainer">
+    <br>
+    <form>
+        <div class="centerContainer">
+            <h2 class="lblHeader2 card-title">Select User Type To Manage</h2>
+            <br>
+            <div class="btnRadGroup btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="ClientAccount" (click)="navigateTo('view-client')"> Client
+                </label>
+                <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="ClientUserAccount"
+                        (click)="navigateTo('view-client-user')"> Client User
+                </label>
+                <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="EmployeeAccount" (click)="navigateTo('view-employee')">
+                    Employee
+                </label>
+                <!-- <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="HubAccount" (click)="navigateTo('view-hub')"> Hub
+                </label>
+                <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="HubUserAccount" (click)="navigateTo('view-hub-user')"> Hub
+                    User
+                </label> -->
+            </div>
+            <br>
+            <br>
+
+            <h2 class="lblHeader2 card-title" *ngIf="service.getUserRoles().includes('SUPER_ADMIN')">
+                Select User Interface To View</h2>
+            <br>
+            <div class="btnRadGroup btn-group btn-group-toggle" data-toggle="buttons"
+                *ngIf="service.getUserRoles().includes('SUPER_ADMIN')">
+                <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="TechnicionAccountInterface"
+                        (click)="navigateTo('technician-dashboard')">
+                    Technician
+                </label>
+                <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="InventoryClerkAccountInterface"
+                        (click)="navigateTo('inventory-clerk-dashboard')">
+                    Inventory Clerk
+                </label>
+                <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="ClientAccountInterface"
+                        (click)="navigateTo('client-dashboard')">
+                    Client User
+                </label>
+                <!-- <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="HubUserAccountInterface"
+                        (click)="navigateTo('hub-dashboard')">
+                    Hub User
+                </label> -->
+                <label class="lblRadio btn btn-secondary">
+                    <input type="radio" name="group1" value="ChatbotRecords"
+                        (click)="navigateTo('chat-support-records')">
+                    Chatbot Records
+                </label>
+            </div>
+            <p class="warningText" *ngIf="error" style="color: red; font-size: larger;">{{error}}</p>
+
+        </div>
+
+
+        <div class="btnReturnContainer">
+            <button class="btnReturn" (click)="back()">
+                <P class="btnReturnText">Return</P>
+            </button>
+        </div>
+
+        <div class="btnContinueContainer">
+            <button class="btnContinue" (click)="navigate()">
+                <P class="btnContinueText">Continue</P>
+            </button>
+        </div>
+    </form>
+</div>

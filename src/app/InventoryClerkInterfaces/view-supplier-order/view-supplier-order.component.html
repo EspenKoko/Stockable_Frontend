@@ -1,0 +1,42 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">Supplier Orders</h2>
+    <br>
+
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Supplier Order Id</th>
+                    <th scope="col">Supplier</th>
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Supplier Contact Number</th>
+                    <th scope="col">Supplier Email Address</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="orderdata && orderdata.length > 0">
+                <tr scope="row" *ngFor="let attribute of orderdata">
+                    <td>{{attribute.supplierOrderId}}</td>
+                    <td>{{attribute.supplier.supplierName}}</td>
+                    <td>{{attribute.date | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{attribute.supplier.supplierContactNumber}}</td>
+                    <td>{{attribute.supplier.supplierEmail}}</td>
+                    <td><button class="btn btn-primary" type="button" (click)="receiveOrder(attribute.supplierOrderId)">Received Order</button></td>
+                </tr>
+            </tbody>
+            <tr *ngIf="!orderdata || orderdata.length == 0">
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <!-- <td><button class="btn btn-primary" routerLink="/technician-error-logs">Update</button></td> -->
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>

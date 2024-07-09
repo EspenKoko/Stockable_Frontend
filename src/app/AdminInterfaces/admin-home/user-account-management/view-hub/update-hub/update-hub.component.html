@@ -1,0 +1,47 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">Update {{title}}</h2>
+
+    <br>
+    <br>
+
+    <form class="inputTableContainter" [formGroup]="editForm" (ngSubmit)="validate(name, qtyOnHand, city)">
+        <table class="CRUDTable table table-borderless">
+
+            <tr scope="row">
+                <td class="lblInputLabel">Name:</td>
+                <td><input type="text" required #name formControlName="hubName"></td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel">Printer Quantity:</td>
+                <td><input class="inputNumberSelecter" type="number" required #qtyOnHand formControlName="qtyOnHand">
+                </td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel" for="SelectList">{{title}} City:</td>
+                <td>
+                    <select class="inputSelectBox" required #city formControlName="cityId">
+                        <option *ngIf="!data || data.length == 0" required>No data</option>
+                        <option *ngFor="let attribute of data" [value]="attribute.cityId" required>{{ attribute.cityName
+                            }}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel">Printer Threhold:</td>
+                <td><input class="inputNumberSelecter" type="number" required formControlName="hubPrinterThreshold"></td>
+            </tr>
+        </table>
+
+        <div class="btnReturnContainer">
+            <button class="btnReturn" (click)="back()">
+                <P class="btnReturnText">Return</P>
+            </button>
+        </div>
+    
+        <div class="btnSubmitContainer">
+            <button class="btnSubmit" type="submit">
+                <P class="btnSubmitText">Update</P>
+            </button>
+        </div>
+    </form>
+</div>

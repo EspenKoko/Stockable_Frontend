@@ -1,0 +1,55 @@
+<div class="reportBody">
+    <br>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 4rem; padding: 0 1rem 0 1rem;">
+        <h1 class="lblHeader1 card-title">Purchase Report</h1>
+    </div>
+    <br>
+    <div class="centerContainer card-body">
+        <div id="pdfToPrint">
+            <h2 *ngIf="generalService.notFound" class="lblHeader3">No records to display at the moment</h2>
+            <div *ngIf="!generalService.notFound" #iframeContainer id="iframeContainer"
+                style="width: 100%; height: 100%;"></div>
+        </div>
+        <br>
+        <div class="linkFooter">
+            <label class="lblInputLabel" style="text-align: center;" for="SelectList"><u>Report Panel</u></label>
+            <div class="c1">
+                <form class="filterForm">
+                    <p style=" color: orange; text-align: center;">Filter Supplier :</p>
+                    <div class="checkbox-list" style="flex-direction: column;">
+                        <label *ngFor="let attribute of supplierData" class="form-control">
+                            <input type="checkbox" [checked]="supplierData.includes(attribute.supplierId)"
+                                (change)="updateSelectedSuppliers(attribute.supplierId)">
+                            {{ attribute.supplierName }}
+                        </label>
+                    </div>
+                    <p style=" color: orange; text-align: center;">Filter From:</p>
+                    <input type="date" name="fromDate" (change)="refreshPDF()" [(ngModel)]="fromSelectedSalePeriod">
+                    <p style=" color: orange; text-align: center;">To:</p>
+                    <input type="date" name="toDate" (change)="refreshPDF()" [(ngModel)]="toSelectedSalePeriod">
+                    <br>
+                    <button class="btn btn-warning" style="width: 100%;" type="reset" (click)="clearFilters()">Clear
+                        Filters</button>
+                </form>
+                <br>
+                <div>
+                    <textarea [(ngModel)]="notes" (keyup)="refreshPDF()" placeholder="Add Notes to pdf"></textarea>
+                </div>
+                <div class="c2">
+                    <a href="#" class="linkFooterItem col"
+                        (click)="onDownload('pdf', $event)"><span>Download</span><span>PDF</span></a>
+                    <a href="#" class="linkFooterItem col"
+                        (click)="onDownload('word', $event)"><span>Download</span><span>WORD</span></a>
+                    <a href="#" class="linkFooterItem col"
+                        (click)="onDownload('xsl', $event)"><span>Download</span><span>XSL</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</div>

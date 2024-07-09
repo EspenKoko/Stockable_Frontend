@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+// .glow{
+//   text-align: center;
+//   animation: glow 1s ease-in-out infinite alternate;
+// }
+
+@keyframes colorChange {
+  0% {
+    color: white;
+  }
+
+  25% {
+    color: blue;
+  }
+
+  50% {
+    color: red;
+  }
+
+  75% {
+    color: green;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+.colorChange {
+  animation: colorChange 5s linear infinite;
+}
+
+#assistant {
+  position: fixed;
+  bottom: 30px;
+  right: 80px;
+  font-family: "Roboto", sans-serif;
+  z-index: 999;
+
+  #assistant-popup-button {
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    width: 55px;
+    height: 55px;
+    margin: 50px calc(50% - 19px);
+    overflow: hidden;
+
+    padding: 0px 20px 0 20px;
+    background-color: orange;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1000;
+
+    .icon {
+      font-size: xx-large;
+    }
+
+    .btnText {
+      margin-left: 20px;
+      font-size: x-large;
+      transition: margin-right 0.2s ease;
+    }
+
+    &:hover {
+      width: 200px;
+      transform: translateX(-50px);
+
+      // .btnText {
+      //   margin-right: 10px;
+      // }
+    }
+  }
+
+  #assistant-popup {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    width: 450px;
+    height: 50vh;
+    min-height: 450px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    z-index: 1000;
+    display: none;
+
+    #assistant-popup-header {
+      background: linear-gradient(120deg, rgb(7, 89, 98) 11.2%, rgb(0, 0, 0) 91.1%);
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+
+      #assistant-popup-close-button {
+        float: right;
+        border: none;
+        background-color: transparent;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+
+    #assistant-popup-body {
+      height: calc(100% - 133px);
+      padding: 10px;
+    }
+
+    #assistant-popup-footer {
+      background: linear-gradient(120deg, rgb(0, 0, 0) 11.2%, rgb(7, 89, 98) 91.1%);
+      color: white;
+      font-size: 14px;
+      padding: 10px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+
+      #assistant-popup-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #fff;
+        border-radius: 5px 5px 0 0;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+
+      #assistant-popup-submit-button {
+        width: 100%;
+        padding: 10px;
+        background-color: gold;
+        color: black;
+        border: none;
+        border-radius: 0 0 5px 5px;
+        cursor: pointer;
+        font-size: 17px;
+      }
+    }
+
+    .messages {
+      height: 100%;
+      overflow: auto;
+
+      .message {
+        display: flow-root;
+        width: 100%;
+
+        .client {
+          background-color: #d7d7d7;
+          color: #333;
+          padding: 10px;
+          border-radius: 5px;
+          margin-bottom: 10px;
+          display: inline-block;
+          max-width: 80%;
+        }
+
+        .user {
+          border: 0.5px solid #333;
+          background-color: #85ff7a;
+          color: #333;
+          padding: 10px;
+          border-radius: 5px;
+          margin-bottom: 10px;
+          display: inline-block;
+          max-width: 80%;
+          text-align: right;
+          float: right;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1280px) {
+    #assistant-popup {
+      width: 380px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    #assistant-popup {
+      width: 335px;
+    }
+  }
+
+  @media only screen and (max-width: 390px) {
+    #assistant-popup {
+      width: 90%;
+      bottom: 80px;
+    }
+  }
+}
+
+// styling help for hover effect: https://codepen.io/mildrenben/pen/rVBrpK

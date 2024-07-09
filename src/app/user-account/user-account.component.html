@@ -1,0 +1,151 @@
+<div class="card-body">
+    <div class="viewPageBodyTest bg-light">
+        <br>
+        <h1 class="lblHeader3 card-title">Your Account</h1>
+        <br>
+        <div id="box">
+            <div id="overlay">
+                <!-- <div class="image" [style.background-image]="'url(data:image/png;base64,' + updateForm.get('profilePicture')?.value + ')'"> -->
+                <img *ngIf="Image && Image != null" class="image" [src]="'data:image/png;base64,' + Image"
+                    alt="Profile Picture" data-toggle="modal" data-target="#exampleModalLong">
+                <span *ngIf="!Image || Image == null" class="material-icons md-light displayIcon" data-toggle="modal"
+                    data-target="#exampleModalLong">account_circle</span>
+                <div class="centerContainer">
+                    <span class="textName">{{Name}}</span>
+                    <button type="button" class="btnToolHelp" matTooltip="Welcome to your account page. By clicking on the image above you will be able to change your profile picture.
+                    Click 'Your Details' tab to change your information.
+                    Click Account actions to update your password and see other relevent account actions."
+                        [matTooltipPosition]="'right'" [matTooltipShowDelay]="500" [matTooltipHideDelay]="1000"
+                        aria-label="Tooltip for help on account">
+                        <P class="btnToolHelpPara">&#63;</P>
+                    </button>
+                </div>
+                <br>
+                <div class="textRole">Role: {{Role}}</div>
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingtwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                    href="#collapsetwo" aria-expanded="false" aria-controls="collapsetwo">
+                                    <div class="title btn btn-danger btn-outline btn-lg">YOUR DETAILS</div>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapsetwo" class="panel-collapse collapse" role="tabpanel"
+                            aria-labelledby="headingtwo">
+                            <div class="panel-body">
+                                <form [formGroup]="updateForm">
+                                    <input class="accordianField" formControlName="userFirstName" type="text"
+                                        placeholder="NAME" [disabled]="isInputDisabled">
+                                    <div *ngIf="updateForm.get('userFirstName')?.touched && updateForm.get('userFirstName')?.hasError('required')"
+                                        class="errorMsg">
+                                        Field cannot be empty.
+                                    </div>
+                                    <div *ngIf="updateForm.get('userFirstName')?.invalid && updateForm.get('userFirstName')?.touched && updateForm.get('userFirstName')?.hasError('whitespace')"
+                                        class="errorMsg">
+                                        First Name should not contain whitespace.
+                                    </div>
+                                    <input class="accordianField" formControlName="userLastName" type="text"
+                                        placeholder="SURNAME" [disabled]="isInputDisabled">
+                                    <div *ngIf="updateForm.get('userLastName')?.touched && updateForm.get('userLastName')?.hasError('required')"
+                                        class="errorMsg">
+                                        Field cannot be empty.
+                                    </div>
+                                    <div *ngIf="updateForm.get('userLastName')?.touched && updateForm.get('userLastName')?.hasError('whitespace')"
+                                        class="errorMsg">
+                                        Last Name should not contain whitespace.
+                                    </div>
+                                    <input class="accordianField" formControlName="email" type="text"
+                                        placeholder="E-MAIL" [disabled]="isInputDisabled">
+                                    <div *ngIf="updateForm.get('email')?.touched && updateForm.get('email')?.hasError('required')" class="errorMsg">
+                                        Field cannot be empty.
+                                    </div>
+                                    <div *ngIf="updateForm.get('email')?.touched && updateForm.get('email')?.hasError('email')"
+                                        class="errorMsg">
+                                        Please enter a valid email address with no spaces.
+                                    </div>
+                                    <input class="accordianField" formControlName="phoneNumber" type="text"
+                                        placeholder="CONTACT NUMBER" [disabled]="isInputDisabled">
+                                    <div *ngIf="updateForm.get('phoneNumber')?.touched && updateForm.get('phoneNumber')?.hasError('pattern')"
+                                        class="errorMsg">
+                                        Please enter a valid 10-digit number with 0 as the starting digit phone number
+                                    </div>
+
+                                    <!-- will display tables based on who is logged in -->
+                                    <input class="submitButtons" *ngIf="isInputDisabled" type="button"
+                                        (click)="toggleUpdate()" value="Change Details">
+                                    <input class="submitButtons" *ngIf="!isInputDisabled" type="submit"
+                                        (click)="updateUser()" value="Update Account" [disabled]="!updateForm.valid">
+                                    <span class="btnLoader" *ngIf="isLoading"></span>
+                                    <input class="submitButtons" *ngIf="!isInputDisabled" type="submit"
+                                        (click)="toggleUpdate()" value="Cancel">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading " role="tab" id="headingOne">
+                            <h4 class="panel-title ">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                    aria-expanded="" aria-controls="collapseOne">
+                                    <div class="title  btn btn-danger btn-outline btn-lg">ACCOUNT ACTIONS</div>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                            aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <input type="button" class="accordianField btnPasswordChange"
+                                    routerLink="/change-password" value="Change Password">
+                                <input type="button" class="accordianField btnSignOut" routerLink="/"
+                                    (click)="service.logout()" value="Sign Out">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Update Profile picture</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="font-size: 40px; color: white;"
+                            (click)="clearChanges()">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body centerContainer" style="height: 300px;">
+                    <img *ngIf="!base64ImageData && base64ImageData == null && Image && Image != null"
+                        class="modalImage" [src]="'data:image/png;base64,' + Image" alt="Profile Picture">
+                    <span *ngIf="!base64ImageData && base64ImageData == null && !Image && Image == null"
+                        class="material-icons md-light modalIcon">account_circle</span>
+                    <img *ngIf="base64ImageData && base64ImageData != null" class="modalImage" [src]="base64ImageData"
+                        alt="Profile Picture">
+                </div>
+                <div class="modal-footer">
+                    <form class="modalFooter">
+                        <p>{{fileNameUploaded}}</p>
+                        <input class="submitButtons" type="file" id="file" #file placeholder="Choose file"
+                            (change)="uploadFile(file.files)" accept="image/*" style="display: none;">
+                        <button type="button" mat-stroked-button color="primary" (click)="openFileInput($event)">Update
+                            profile Picture</button>
+                        <button *ngIf="fileNameUploaded.length > 0" type="button" class="modalButton" mat-stroked-button
+                            color="basic" (click)="changeProfilePicture()" data-dismiss="modal">Save</button>
+                        <button *ngIf="fileNameUploaded.length == 0" type="reset" mat-stroked-button color="warn"
+                            (click)="removeProfilePicture()" data-dismiss="modal" [disabled]="!Image">Remove picture</button>
+                        <button *ngIf="fileNameUploaded.length > 0" type="reset" mat-stroked-button color="warn"
+                            (click)="clearChanges()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,44 @@
+h2 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.viewPageBody {
+  background-color: #2D4E56;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  width: 700px;
+  background-color: white;
+}
+
+.table-bordered {
+  border: 1px solid #ddd !important;
+}
+
+table caption {
+  padding: .5em 0;
+}
+
+@media screen and (max-width: 767px) {
+  table caption {
+    display: none;
+  }
+}
+
+#iframeContainer {
+  padding: 0% 10% 10% 10%;
+}
+
+.p {
+  text-align: center;
+  padding-top: 140px;
+  font-size: 14px;
+}

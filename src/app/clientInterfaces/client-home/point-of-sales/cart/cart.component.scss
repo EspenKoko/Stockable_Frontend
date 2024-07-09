@@ -1,0 +1,25 @@
+.increase,
+.decrease {
+    color: goldenrod;
+    height: auto;
+    width: auto;
+    transition: .5s;
+}
+
+.increase:hover,
+.decrease:hover {
+    color: gold;
+    cursor: pointer;
+}
+
+.viewTableContainer{
+    max-height: 500px;
+}
+
+.viewTable tfoot{
+    background-color: white;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+

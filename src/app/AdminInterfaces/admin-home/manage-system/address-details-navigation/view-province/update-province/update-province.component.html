@@ -1,0 +1,36 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Update {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="editForm" (ngSubmit)="edit()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">{{title}} Name:</td>
+                    <td><input type="text" required formControlName="provinceName" #province></td>
+                </tr>
+                <tr *ngIf="editForm.get('provinceName')?.dirty && editForm.get('provinceName')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="editForm.get('provinceName')?.dirty && editForm.get('provinceName')?.hasError('pattern') || editForm.get('provinceName')?.dirty && editForm.get('provinceName')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain numbers or special characters</td>
+                </tr>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!editForm.valid">
+                    <P class="btnSubmitText">Update</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div>
+    <br>
+    <h1 class="lblHeader2 card-title">Diagnostics Checklist</h1>
+    <br>
+
+    <form class="diagnosticTable" [formGroup]="diagnosticChecklist">
+        <table class="nonViewTable table table-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th><strong>Checklist</strong></th>
+                    <th><strong>Comments</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" formControlName="rollerCheck" />
+                            All Rollers Ok?
+                        </label>
+                    </td>
+                    <td rowspan="7"><textarea formControlName="diagnosticComment"></textarea></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" formControlName="beltCheck" />
+                            Belt Ok?
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" formControlName="ethernetPortCheck" />
+                            Ethernet Port Ok?
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" formControlName="lcdScreenCheck" />
+                            LCD OK?
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" formControlName="powerSupplyCheck" />
+                            Power Supply Ok?
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" formControlName="motherboardCheck" />
+                            MotherBoard Ok?
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" formControlName="hopperCheck" />
+                            All Hoppers Ok?
+                        </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="btnReturnContainer">
+            <button class="btnReturn" (click)="back()">
+                <P class="btnReturnText">Return</P>
+            </button>
+        </div>
+
+        <div class="btnSubmitContainer">
+            <button class="btnSubmit" (click)="checkState()">
+                <P class="btnSubmitText">Complete Checklist</P>
+            </button>
+        </div>
+    </form>
+</div>

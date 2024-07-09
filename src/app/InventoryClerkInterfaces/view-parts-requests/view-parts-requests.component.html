@@ -1,0 +1,40 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">Parts Requests</h2>
+    <br>
+
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Purchase Order Id</th>
+                    <th scope="col">Printer Serial Number</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="partsRequestdata && partsRequestdata.length > 0">
+                <tr scope="row" *ngFor="let attribute of partsRequestdata, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.purchaseOrderId}}</td>
+                    <td>{{attribute.repair.errorLog.assignedPrinter.serialNumber}}</td>
+                    <td>{{attribute.purchaseOrder.purchaseOrderDate | date: 'dd/MM/yyyy'}}</td>
+                    <td><button class="btn btn-primary" type="button" 
+                            [routerLink]="['/view-parts-request', attribute.repairId]"> View Parts Request</button></td>
+                </tr>
+            </tbody>
+            <tr *ngIf="!partsRequestdata || partsRequestdata.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <!-- <td><button class="btn btn-primary" routerLink="/technician-error-logs">Update</button></td> -->
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>

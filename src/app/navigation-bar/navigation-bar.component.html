@@ -1,0 +1,139 @@
+<!-- use *ngIf="isAuthenticated()" for user rights-- already done in appComponent -->
+
+<!-- add "fixed-top property to enable a sticky navbar but allow for top padding in the app component styles" -->
+<!-- <nav class="CustomNavbar navbar navbar-expand-lg fixed-top"> -->
+<nav class="CustomNavbar navbar navbar-expand-lg">
+  <a class="navbar-brand" href="/admin-dashboard"
+    *ngIf="service.getUserRoles().includes('ADMIN') || service.getUserRoles().includes('SUPER_ADMIN')"><img
+      class="imgLogo" src="/assets/download.jpeg"></a>
+  <a class="navbar-brand" href="/client-dashboard"
+    *ngIf="service.getUserRoles().includes('CLIENT_USER') || service.getUserRoles().includes('CLIENT_ADMIN')"><img
+      class="imgLogo" src="/assets/download.jpeg"></a>
+  <a class="navbar-brand" href="/inventory-clerk-dashboard"
+    *ngIf="service.getUserRoles().includes('INVENTORY_CLERK')"><img class="imgLogo" src="/assets/download.jpeg"></a>
+  <a class="navbar-brand" href="/technician-dashboard" *ngIf="service.getUserRoles().includes('TECHNICIAN')"><img
+      class="imgLogo" src="/assets/download.jpeg"></a>
+
+  <!-- bootstrap navbar -->
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+
+  <!-- espenstrap navbar -->
+  <!-- <button class="navbar-toggler" type="button" (click)="toggleNavbar()"
+      [attr.aria-expanded]="isNavbarExpanded ? 'true' : 'false'" aria-controls="navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarSupportedContent" [ngClass]="{'show': isNavbarExpanded}" class="collapse navbar-collapse transition"> -->
+
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()" aria-controls="navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div id="navbarSupportedContent" class="collapse navbar-collapse transition">
+
+    <!-- admin navbar -->
+    <ul class="navbar-nav mr-auto"
+      *ngIf="service.getUserRoles().includes('ADMIN') || service.getUserRoles().includes('SUPER_ADMIN')">
+      <!-- <ul class="navbar-nav mr-auto"> -->
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin-dashboard"><span class="navText">Dashboard</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/manage-systems"><span class="navText">Manage Systems</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/user-account-management"><span class="navText">User Management</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/stock-management"><span class="navText">Stock Management</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin-error-log"><span class="navText">Error Logs</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/view-reports"><span class="navText">Reporting</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/FAQs"><span class="navText">Help</span></a>
+      </li>
+    </ul>
+
+    <!-- Client navbar -->
+    <ul class="navbar-nav mr-auto"
+      *ngIf="service.getUserRoles().includes('CLIENT_USER') || service.getUserRoles().includes('CLIENT_ADMIN')">
+      <li class="nav-item active">
+        <a class="nav-link" href="/client-dashboard"><span class="navText">Dashboard</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item active">
+        <a class="nav-link" href="/client-printers"><span class="navText">Printers</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/client-financials"><span class="navText">Financials</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/FAQs"><span class="navText">Help</span></a>
+      </li>
+    </ul>
+
+    <!-- Inventory clerk navbar -->
+    <ul class="navbar-nav mr-auto" *ngIf="service.getUserRoles().includes('INVENTORY_CLERK')">
+      <li class="nav-item">
+        <a class="nav-link" href="/inventory-clerk-dashboard"><span class="navText">Dashboard</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/FAQs"><span class="navText">Help</span></a>
+      </li>
+    </ul>
+
+    <!-- Technician navbar -->
+    <ul class="navbar-nav mr-auto" *ngIf="service.getUserRoles().includes('TECHNICIAN')">
+      <li class="nav-item">
+        <a class="nav-link" href="technician-dashboard"><span class="navText">Dashboard</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item active">
+        <a class="nav-link" href="ifel"><span class="navText">In-field Checklist</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/FAQs"><span class="navText">Help</span></a>
+      </li>
+    </ul>
+    
+    <!-- Hub navbar -->
+    <!-- <ul class="navbar-nav mr-auto" *ngIf="service.getUserRoles().includes('HUB_USER')">
+      <li class="nav-item active">
+        <a class="nav-link" href="/hub-dashboard"><span class="navText">Dashboard</span></a>
+      </li>
+      <span class="nav-divider">|</span>
+      <li class="nav-item">
+        <a class="nav-link" href="/FAQs"><span class="navText">Help</span></a>
+      </li>
+    </ul> -->
+    <br>
+    
+    <div id="accountIconContainer">
+      <span routerLink="/account" style="color: white; cursor:pointer">{{userName}}</span>
+      <div *ngIf="!image && image == null" class="userAccountCircle" routerLink="/account">
+        <span class="material-icons md-light">account_circle</span>
+      </div>
+      <img *ngIf="image && image != null" class="navProfilePicture" [src]="'data:image/png;base64,' + image"
+      alt="pp" routerLink="/account">
+    </div>
+  </div>
+</nav>

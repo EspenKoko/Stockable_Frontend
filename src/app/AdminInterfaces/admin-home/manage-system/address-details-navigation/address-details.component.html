@@ -1,0 +1,32 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">Select Category to View</h2>
+    <br>
+    <div class="centerContainer">
+        <div class="btnRadGroup btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="lblRadio btn btn-secondary">
+                <input type="radio" name="group1" value="Province" #province> Province
+            </label>
+            <label class="lblRadio btn btn-secondary">
+                <input type="radio" name="group1" value="City" #city> City
+            </label>
+            <!-- <label class="lblRadio btn btn-secondary">
+            <input type="radio" name="group1" value="Branch" #branch> Branch
+        </label> -->
+        </div>
+
+        <p class="warningText" *ngIf="error" style="color: red; font-size: larger;">{{error}}</p>
+
+        <div class="btnReturnContainer">
+            <button class="btnReturn" (click)="back()">
+                <P class="btnReturnText">Return</P>
+            </button>
+        </div>
+
+        <div class="btnContinueContainer">
+            <button class="btnContinue" (click)="navigate(province, city)">
+                <P class="btnContinueText">Continue</P>
+            </button>
+        </div>
+    </div>
+</div>

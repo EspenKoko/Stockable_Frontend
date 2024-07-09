@@ -1,0 +1,103 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <!-- when update is clicked -->
+        <h2 class="lblHeader2 card-title" *ngIf="!navigated">Create {{title}} Order</h2>
+        
+        <!-- when add new order is clicked -->
+        <h2 class="lblHeader2 card-title" *ngIf="navigated">Update {{title}} Order</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="addForm" (ngSubmit)="manuallyAddStock()">
+            <table class="CRUDTable table table-borderless">
+                <!-- <tr scope="row">
+                <td class="lblInputLabel" for="SelectList">{{title}} Category:</td>
+                <td>
+                    <select name="selectStockType" class="inputSelectBox" #selectList
+                        required name="type" formControlName="stockId">
+                        <option *ngIf="!stockCategoryData || stockCategoryData.length == 0" required>No data</option>
+                        <option *ngIf="stockCategoryData" required>Filter by category</option>
+                        <option *ngFor="let attribute of stockCategoryData" [value]="attribute.stockId">{{attribute.stockName }}
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel" for="SelectList">{{title}} Type:</td>
+                <td>
+                    <select name="selectStockType" class="inputSelectBox" #selectList
+                        required name="type" formControlName="stockId">
+                        <option *ngIf="!stockTypeData || stockTypeData.length == 0" required>No data</option>
+                        <option *ngIf="stockTypeData" required>Filter by Type</option>
+                        <option *ngFor="let attribute of stockTypeData" [value]="attribute.stockId">{{attribute.stockName }}
+                        </option>
+                    </select>
+                </td>
+            </tr> -->
+                <!-- when update is clicked -->
+                <tr scope="row" *ngIf="navigated">
+                    <td class="lblInputLabel" for="SelectList">{{title}} Item:</td>
+                    <td>
+                        <select name="selectStockType" class="inputSelectBox" required name="type"
+                            formControlName="stockId">
+                            <option *ngIf="!data || data.length == 0" required>No data</option>
+                            <option *ngIf="data && !navigated" value="" required>Select Stock Item</option>
+                            <option *ngFor="let attribute of data" [value]="attribute.stock.stockId">
+                                {{attribute.stock.stockName }}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
+                <!-- when add new order is clicked -->
+                <tr scope="row" *ngIf="!navigated">
+                    <td class="lblInputLabel" for="SelectList">{{title}} Item:</td>
+                    <td>
+                        <select name="selectStockType" class="inputSelectBox" required name="type"
+                            formControlName="stockId">
+                            <option *ngIf="!data || data.length == 0" required>No data</option>
+                            <option *ngIf="data && data.length > 0" value="" required>Select Stock Item</option>
+                            <option *ngFor="let attribute of data" [value]="attribute.stockId">
+                                {{attribute.stockName }}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('stockId')?.dirty && addForm.get('stockId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please select a stock item.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Stock QTY:</td>
+                    <!-- when update is clicked -->
+                    <td *ngIf="navigated"><input class="inputNumberSelecter" type="number" min="1" #stockQTY required
+                            name="number" value="{{data[0]?.stockReoderQuantity}}" formControlName="qty" #qty2></td>
+
+                    <!-- when add new order is clicked -->
+                    <td *ngIf="!navigated"><input class="inputNumberSelecter" type="number" min="1" #stockQTY required
+                            name="number" formControlName="qty" #qty1></td>
+                </tr>
+                <tr *ngIf="addForm.get('qty')?.dirty && addForm.get('qty')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="addForm.get('qty')?.dirty && addForm.get('qty')?.hasError('min')">
+                    <td></td>
+                    <td class="errorMsg">Value must be greater than 0</td>
+                </tr>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!addForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

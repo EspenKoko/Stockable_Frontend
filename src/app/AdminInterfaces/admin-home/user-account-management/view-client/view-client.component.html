@@ -1,0 +1,79 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">{{title}} Management</h2>
+    <br>
+    
+    <!-- search funtions will need to be changed accordingly based on the type and name of componant -->
+    <div class="headerSection row">
+        <label class="lblInputLabel col-5" for="searchCriteria">{{ title }} Name:</label>
+        <div class="searchBoxContainter col-7">
+            <input type="text" class="inputSearchBox" placeholder="Enter {{ title }} Name" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="GetClient()">
+        </div>
+        <!-- <div class="box">
+            <form name="search">
+                <input type="text" class="input" name="searchCriteria" onmouseout="this.value = ''; this.blur();"
+                    [(ngModel)]="searchTerm" (keyup)="GetClient()">
+            </form>
+            <span class="account material-icons md-light">search</span>
+        </div>-->
+    </div>
+    <br>
+
+    <!-- modify table headers and rows accordingly -->
+    <div class="viewTableContainer">
+        <table class="viewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col" (click)="sortTable('name')">Name</th>
+                    <th scope="col" (click)="sortTable('number')">Contact Number</th>
+                    <th scope="col" (click)="sortTable('email')">Email Address</th>
+                    <th scope="col" (click)="sortTable('address')">Address</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <!-- rows for when api is connected and there is data being sent through successfully -->
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.clientName}}</td>
+                    <td>{{attribute.clientNumber}}</td>
+                    <td>{{attribute.clientEmail}}</td>
+                    <td>{{attribute.clientAddress}}</td>
+                    <td><button class="btn btn-primary"
+                            [routerLink]="['/update-client', attribute.clientId]">Update</button></td>
+                    <!-- <td><button class="btn btn-danger" (click)="Delete(attribute.clientId)">{{deleteText}}</button></td> -->
+                    <td><button class="btn btn-danger"
+                            (click)="toggleConfirmButton(i, attribute.clientId)">{{attribute.confirmButton ? 'Confirm' :
+                            'Delete'}}</button></td>
+                </tr>
+            </tbody>
+            <!-- default row when no data in api or api is not connected -->
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled type="button" routerLink="/update-client">Update</button></td>
+                <td><button class="btn btn-danger" disabled="disabled">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- this container is always for return and back button -->
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <!-- last container always for submit and continue or create and update buttons AND ENSURE ROUTES ARE CHANGED ACCORDINGLY -->
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" routerLink="/create-client">
+            <P class="btnSubmitText">Add New {{title}}</P>
+        </button>
+    </div>
+</div>

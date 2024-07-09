@@ -1,0 +1,75 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Technical Service Report</h2>
+        <br>
+
+        <form [formGroup]="tsrForm" class="inputTableContainter" (ngSubmit)="addTSR()">
+            <table class="CRUDTable table table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Date:</td>
+                    <td>
+                        <input type="date" value="{{purchaseOrder?.purchaseOrderDate | date: 'yyy-MM-dd'}}"
+                            (mouseover)="tooltip.show()"
+                            aria-label="Show tooltip on the button at the end of this section" readonly>
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Technician:</td>
+                    <td>
+                        <input type="text" value="{{technician}}" (mouseover)="tooltip.show()"
+                            aria-label="Show tooltip on the button at the end of this section" readonly>
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Printer Serial Number:</td>
+                    <td>
+                        <input type="text"
+                            value="{{purchaseOrder?.repair?.errorLog?.assignedPrinter?.serialNumber}}"
+                            (mouseover)="tooltip.show()"
+                            aria-label="Show tooltip on the butt?on at the end of this section" readonly>
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Repair Time:</td>
+                    <td>
+                        <input type="number" style="width: 45px;" value="{{purchaseOrder?.repairTime}}"
+                            (mouseover)="tooltip.show()"
+                            aria-label="Show tooltip on the button at the end of this section" readonly>
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Repairs Done:</td>
+                    <td style="display: flex; justify-content: center; gap: 10px">
+                        <textarea type="text" formControlName="repairsDone"
+                            placeholder="What was done to the printer {{purchaseOrder?.repair?.errorLog?.assignedPrinter?.serialNumber}}?"
+                            required></textarea>
+
+                        <button type="button" class="btnToolHelp" #tooltip="matTooltip"
+                            matTooltip="Repairs Done is the only field needed to be filled in and is a required field"
+                            [matTooltipHideDelay]="2000" [matTooltipPosition]="'above'">
+                            <P class="btnToolHelpPara">&#63;</P>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="tsrForm.get('repairsDone')?.touched && tsrForm.get('repairsDone')?.hasError('required')"
+                    class="errorMsg">
+                    <td></td>
+                    <td>Field cannot be empty</td>
+                </tr>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!tsrForm.valid">
+                    <P class="btnSubmitText">Complete TSR</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

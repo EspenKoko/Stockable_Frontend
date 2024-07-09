@@ -1,0 +1,18 @@
+<div class="mainDiv">
+    <div class="cardStyle">
+      <form name="signupForm" id="signupForm" [formGroup]="confirmForm" (ngSubmit)="confirmEmail()">
+  
+        <img src="/assets/download.jpeg" id="signupLogo" />
+  
+        <h2 class="formTitle">Please confirm your email</h2>
+  
+        <div class="buttonWrapper">
+          <button type="submit" id="submitButton" class="submitButton">
+            <span>Confirm Email</span>
+            <span class="btnLoader" *ngIf="isLoading"></span>
+          </button>
+        </div>
+  
+      </form>
+    </div>
+  </div>

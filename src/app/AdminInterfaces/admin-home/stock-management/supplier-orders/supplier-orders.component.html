@@ -1,0 +1,63 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">Supplier Orders</h2>
+    <br>
+
+    <!-- search funtions will need to be changed accordingly based on the type and name of componant -->
+    <!-- <div class="headerSection row">
+        <label class="lblInputLabel col-5" for="searchCriteria">Receipt Number:</label>
+        <div class="searchBoxContainter col-7">
+            <input type="text" class="inputSearchBox" placeholder="Enter receipt Number" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="getOrder()">
+        </div>
+    </div>
+    <br> -->
+
+    <!-- modify table headers and rows accordingly -->
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <!-- <th scope="col">Receipt No.</th> -->
+                    <th scope="col">Date</th>
+                    <th scope="col">Supplier</th>
+                    <th scope="col">Order By</th>
+                    <th scope="col">Status</th>
+                    <!-- <th scope="col">Action</th> -->
+                </tr>
+            </thead>
+            <!-- rows for when api is connected and there is data being sent through successfully -->
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <!-- <td>{{attribute.clientInvoice.clientInvoiceNumber}}</td> -->
+                    <td>{{attribute.date | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{attribute.supplier.supplierName}}</td>
+                    <td>{{attribute.employee.user.userFirstName + " " + attribute.employee.user.userLastName }}</td>
+                    <td>{{attribute.supplierOrderStatus.supplierOrderStatusName}}</td>
+                    <!-- <td *ngIf="attribute.supplierOrderStatusId == 1"><button class="btn btn-primary"
+                            (click)="sendOrder(attribute)">Recieved</button></td>
+                    <td *ngIf="attribute.supplierOrderStatusId == 2"><button class="btn btn-secondary" disabled>Recieved</button></td> -->
+                </tr>
+            </tbody>
+            <!-- default row when no data in api or api is not connected -->
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+               <!-- <td>No Data</td> -->
+                <!-- <td><button class="btn btn-secondary" disabled type="button" disabled>Recieve</button></td> -->
+            </tr>
+        </table>
+    </div>
+
+    <!-- this container is always for return and back button -->
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</div>

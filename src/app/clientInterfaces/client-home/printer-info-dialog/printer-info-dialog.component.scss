@@ -1,0 +1,45 @@
+
+/* Override Angular Material dialog styles */
+.mat-dialog-container {
+    padding: 20px;
+    max-width: 400px; /* Limit the maximum width of the dialog */
+    border-radius: 8px; /* Add rounded corners to the dialog */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+  }
+  
+  /* Style the dialog title */
+  .mat-dialog-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the dialog content */
+  .mat-dialog-content {
+    font-size: 18px;
+  }
+  
+  /* Add some spacing between content paragraphs */
+  .mat-dialog-content .property {
+    margin-bottom: 8px;
+  }
+  
+  /* Style the labels */
+  .mat-dialog-content .property .label {
+    display: inline-block;
+    width: 120px; /* Set the width of the label column */
+    font-weight: bold;
+  }
+  
+  /* Style the values */
+  .mat-dialog-content .property .value {
+    display: inline-block;
+    width: calc(100% - 120px); /* Calculate the width to fill remaining space */
+  }
+  
+  /* Style the close button */
+  button[mat-dialog-close] {
+    color: #007bff;
+    font-size: 16px;
+    font-weight: bold; /* Make the button text bold */
+  }
+  

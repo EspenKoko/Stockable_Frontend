@@ -1,0 +1,40 @@
+.buttonGroup {
+    flex-direction: row;
+    gap: 10rem;
+}
+
+.btnFormReturn {
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    background-color: orange;
+    transition: 0.5s;
+}
+
+.btnFormSubmit {
+    border-radius: 20px;
+    width: 100%;
+    height: 40px;
+    background-color: green;
+    transition: 0.5s;
+}
+
+.btnFormReturn:hover {
+    border-radius: 25px;
+    width: 110px;
+}
+
+.btnFormSubmit:hover {
+    border-radius: 25px;
+    width: 120px;
+}
+
+@media only screen and (max-width: 600px) {
+    .btnFormSubmit {
+        width: 130px;
+    }
+
+    .buttonGroup {
+        gap: 5rem;
+    }
+}

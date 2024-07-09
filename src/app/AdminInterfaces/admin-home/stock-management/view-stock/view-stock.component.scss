@@ -1,0 +1,51 @@
+#colourChecker {
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+td p {
+    width: 100px;
+    height: 25px;
+}
+
+.btnPricing {
+    border-radius: 20px;
+    position: fixed;
+    bottom: 3%;
+    right: min(200px, 25%);
+
+    width: 130px;
+    height: 45px;
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btnStockTake{
+    border-radius: 20px;
+    position: fixed;
+    bottom: 3%;
+    right: min(350px, 45%);
+
+    width: 130px;
+    height: 45px;
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btnPricing:hover,
+.btnPricing:focus {
+
+    background: linear-gradient(235deg, rgba(218, 165, 32, 0.8), transparent) gold;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 1s;
+    transition: box-shadow 0.5s;
+}

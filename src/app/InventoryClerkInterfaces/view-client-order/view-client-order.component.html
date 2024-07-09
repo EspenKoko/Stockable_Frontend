@@ -1,0 +1,45 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">Client Orders</h2>
+    <br>
+
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Client Order Id</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Client Contact Number</th>
+                    <th scope="col">Client Email Address</th>
+                    <th scope="col">Branch Code</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="orderdata && orderdata.length > 0">
+                <tr scope="row" *ngFor="let attribute of orderdata">
+                    <td>{{attribute.clientOrderId}}</td>
+                    <td>{{attribute.clientOrder.clientUser.client.clientName}}</td>
+                    <td>{{attribute.clientOrder.clientInvoice.clientInvoiceDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{attribute.clientOrder.clientUser.client.clientNumber}}</td>
+                    <td>{{attribute.clientOrder.clientUser.client.clientEmail}}</td>
+                    <td>{{attribute.clientOrder.clientUser.branch.branchCode}}</td>
+                    <td><button class="btn btn-primary" type="button" (click)="sendOrder(attribute.clientOrderId)">Send Order</button></td>
+                </tr>
+            </tbody>
+            <tr *ngIf="!orderdata || orderdata.length == 0">
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled>No Action</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>

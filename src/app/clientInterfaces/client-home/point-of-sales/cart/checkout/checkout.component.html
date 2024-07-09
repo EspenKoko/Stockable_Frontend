@@ -1,0 +1,87 @@
+<div class="card-body checkoutBody">
+
+    <h1 class="lblHeader2">Checkout</h1>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="viewtableContainer">
+                <table class="viewtable table table-light">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" colspan="3">You are checking out the following:</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="table-body" *ngIf="VAT && markup">
+                        <tr *ngFor="let order of ordersInCart">
+                            <td>{{order.stock.stockName}}</td>
+                            <td>X {{order.quantity}}</td>
+                            <td>{{(order.price * order.quantity)
+                                + (order.price * order.quantity * markup.markupPercent)
+                                + (order.price * order.quantity * VAT.vatPercent)| currency: 'R '}}</td>
+                        </tr>
+                    </tbody>
+
+                    <tfoot class="table-footer" *ngIf="VAT">
+                        <tr *ngIf="ordersInCart && ordersInCart.length > 0">
+                            <td></td>
+                            <td style="display: flex; flex-direction:row; text-align: center; justify-content: center;">
+                                <b>Vat: {{VAT.vatPercent * 100 + '%'}}</b>
+                            </td>
+                            <td>{{totalCostOfOrdersInCart * VAT.vatPercent | currency: 'R '}}</td>
+                        </tr>
+                        <tr *ngIf="ordersInCart && ordersInCart.length > 0">
+                            <td></td>
+                            <td style="display: flex; flex-direction:row; text-align: center; justify-content: center;">
+                                <b>Total:</b>
+                            </td>
+                            <td>{{totalCostOfOrdersInCart | currency: 'R '}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-4 infoCol">
+            <form [formGroup]="clientOrderForm" (ngSubmit)="checkout()">
+                <table style="width: 100%; max-height: 600px;">
+                    <tr>
+                        <th style="display: flex; justify-content: right;">Name: </th>
+                        <th>{{purchaserName}}</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td colspan="3">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <select class="inputSelectBox" name="payment_method" formControlName="paymentTypeId"
+                                #paymentMethod required>
+                                <option *ngIf="paymentTypes && paymentTypes.length >= 0" value="">Select Payment Method
+                                </option>
+                                <option *ngIf="!paymentTypes || paymentTypes.length == 0">No Available Payment Method
+                                </option>
+                                <option *ngFor="let attribute of paymentTypes" [value]="attribute.paymentTypeId">
+                                    {{attribute.paymentTypeName}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="col-4 infoColButton"><button class="btn btn-danger" type="reset"
+                                style="width: 100%;" routerLink="/cart">Cancel</button></td>
+
+                        <!-- Comment out cell depending on whether using pay gate or not or a secure server or not-->
+                        <!-- <td colspan="2" class="col-8 infoColButton"><button class="btn btn-primary" type="submit"
+                                style="width: 100%;">Test Checkout</button></td> -->
+                        <td colspan="2"><app-payfastcheckout class="col-8"></app-payfastcheckout></td>
+                        <!-- <td><app-squarecheckout></app-squarecheckout></td> -->
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

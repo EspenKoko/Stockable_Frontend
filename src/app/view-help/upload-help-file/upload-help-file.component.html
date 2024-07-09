@@ -1,0 +1,42 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Help File Set Up</h2>
+        <br>
+        <form class="inputTableContainter" (ngSubmit)="uploadPdf()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Help file:</td>
+                    <td>
+                        <input class="btn btn-primary" type="file" (change)="onFileSelected($event)" accept=".pdf" name="fileUpload" [(ngModel)]="selectedFile">
+                        <span class="requiredField">*</span>
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Which user is this for:</td>
+                    <td>
+                        <select class="inputSelectBox" name="user" required [(ngModel)]="userType">
+                            <option *ngIf="!data || data.length == 0" required>No data</option>
+                            <option *ngIf="data && data.length > 0" value="" required>Select a user type for help</option>
+                            <option *ngIf="data && data.length > 0" value="999" required>Client user</option>
+                            <option *ngFor="let attribute of data" [value]="attribute.employeeTypeId">
+                                {{attribute.employeeTypeName}}</option>
+                        </select>
+                        <span class="requiredField">*</span>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <div class="buttonGroup">
+                <button class="btnFormReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+
+                <button class="btnFormSubmit" type="submit">
+                    <P class="btnSubmitText">Upload</P>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>

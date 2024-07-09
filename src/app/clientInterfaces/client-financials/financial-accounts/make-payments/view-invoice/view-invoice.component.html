@@ -1,0 +1,81 @@
+<div class="viewPageBody">
+    <h2 *ngIf="data" class="lblHeader2 card-title">Purchase Order For Printer:
+        {{data.repair.errorLog.assignedPrinter.serialNumber}}
+    </h2>
+
+    <br>
+
+    <!-- modify table headers and rows accordingly -->
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Items</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total Price</th>
+                </tr>
+            </thead>
+            <!-- rows for when api is connected and there is data being sent through successfully -->
+            <tbody *ngIf="markup && repairStock && repairStock.length > 0">
+                <tr scope="row" *ngFor="let attribute of repairStock, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.stock.stockName}}</td>
+                    <td>{{attribute.qty}}</td>
+                    <td>{{(attribute.price?.price * attribute.qty) + (attribute.price?.price * attribute.qty) *
+                        markup.markupPercent |
+                        currency: 'R '}}</td>
+                </tr>
+            </tbody>
+            <!-- default row when no data in api or api is not connected -->
+            <tr *ngIf="!repairStock || repairStock.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+            </tr>
+            <tfoot *ngIf="VAT && labourRate && data">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Labour {{data.repairTime + "hr(s)"}}:</td>
+                    <td>{{(labourRate.labourRate * data.repairTime) + (labourRate.labourRate * data.repairTime *
+                        VAT.vatPercent) | currency: 'R '}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Vat Exclusive:</td>
+                    <td>{{TotalExVat | currency: 'R '}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>VAT ({{VAT.vatPercent * 100 + "%"}}):</td>
+                    <td>{{VATAmount | currency: 'R '}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total:</td>
+                    <td>{{TotalExVat + VATAmount | currency: 'R '}}</td>
+                </tr>
+                <!-- <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="display:flex;flex-direction: row; gap: 1rem"><button class="btn btn-primary"
+                            (click)="makePaymentService.makePayment(data)">Make Payment</button>
+                    </td>
+                </tr> -->
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- this container is always for return and back button -->
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</div>

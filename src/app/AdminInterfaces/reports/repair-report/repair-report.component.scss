@@ -1,0 +1,208 @@
+/* styles.css or your component's SCSS file */
+.chart-container {
+    width: 85%; /* Adjust to your desired width */
+    height: 800px; /* Adjust to your desired height */
+}
+
+.lsit-container{
+    background-color: white;
+    width: 20%;
+    text-align: left;
+    font-weight: 500;
+}
+
+.desc{
+  padding: 10px,10px,10px,10px;
+}
+
+/* styles.css or your component's SCSS file */
+.status-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.status-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.chart-legend li span {
+    font-weight: bold;
+  }
+
+  /* Add this to your component's stylesheet */
+.status-table {
+    border-collapse: collapse; /* Collapse the borders between cells */
+    width: 100%;
+    margin-top: 20px; /* Adjust as needed */
+  }
+  
+.status-table th{
+border: 1px solid black; /* Add border to cells */
+padding: 8px; /* Adjust as needed */
+text-align: center;
+background-color: white;
+}
+
+.status-table td {
+    text-align: left;
+    border: 1px solid black;
+    padding: 8px;
+}
+
+
+.status-table .last-row {
+border-bottom: none; /* Remove border at the bottom of the last row */
+}
+
+
+.reportTable th,
+.reportTable td {
+  padding: 15px 20px; /* Adjust the padding values as needed */
+}
+
+.reportBody {
+    padding-top: 2.5%;
+}
+
+.centerContainer {
+    padding: 2.5% 5% 5% 5%;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+}
+
+.linkFooter {
+    padding-top: 15vh;
+    height: 100%;
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+textarea {
+    margin-bottom: 5px;
+    min-height: 200px;
+    max-height: 200px;
+    width: 200px;
+    border-radius: 0px;
+}
+
+#pdfToPrint {
+    width: 850px;
+    height: 900px;
+    background-color: rgb(255, 255, 255);
+    border: solid black 2px;
+    border-radius: 7px;
+}
+
+a {
+    background: #ffffff;
+    border: solid 1px #e6e6e6;
+    border-radius: 2px;
+    display: inline-block;
+    height: 100px;
+    line-height: 100px;
+    margin: 5px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+}
+
+a span {
+    background: #f2594b;
+    border-radius: 4px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: normal;
+    padding: 5px 10px;
+    position: relative;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+a span:last-child {
+    margin-left: -20px;
+}
+
+a:before,
+a:after {
+    background: #ffffff;
+    border: solid 3px #9fb4cc;
+    border-radius: 4px;
+    content: '';
+    display: block;
+    height: 35px;
+    left: 50%;
+    margin: -17px 0 0 -12px;
+    position: absolute;
+    top: 50%;
+    /*transform:translate(-50%,-50%);*/
+
+    width: 25px;
+}
+
+a:hover:before,
+a:hover:after {
+    background: #e2e8f0;
+}
+
+/*a:before{transform:translate(-30%,-60%);}*/
+
+a:before {
+    margin: -23px 0 0 -5px;
+}
+
+a:hover {
+    background: #e2e8f0;
+    border-color: #9fb4cc;
+}
+
+a:active {
+    background: #dae0e8;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, .25);
+}
+
+a span:first-child {
+    display: none;
+}
+
+a:hover span:first-child {
+    display: inline-block;
+}
+
+a:hover span:last-child {
+    display: none;
+}
+
+.lblHeader1 {
+    font-size: 50px;
+    width: 450px;
+    height: 150px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin: 0;
+}
+
+.watermark::after {
+    content: "ACS Fintech Altron";
+    opacity: 0.1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(300deg);
+    font-size: 150px;
+    color: orange;
+    pointer-events: none;
+    z-index: 1;
+}

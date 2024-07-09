@@ -1,0 +1,67 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">Update Assigned Printer</h2>
+
+    <br>
+    <br>
+
+    <form class="inputTableContainter" [formGroup]="editForm" #form="ngForm" (ngSubmit)="edit()">
+        <table class="CRUDTable table table-borderless">
+            <tr scope="row">
+                <td class="lblInputLabel">Printer code:</td>
+                <td><input type="text" required name="printer" formControlName="serialNumber"></td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel" for="SelectList">Client:</td>
+                <td>
+                    <select name="client" formControlName="clientId" class="inputSelectBox" required>
+                        <option *ngIf="!clientData || clientData.length == 0" required>No data</option>
+                        <option *ngFor="let attribute of clientData" [value]="attribute.clientId" required>{{
+                            attribute.clientName }}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel" for="SelectList">Branch:</td>
+                <td>
+                    <select name="branch" formControlName="branchId" class="inputSelectBox" required>
+                        <option *ngIf="!branchData || branchData.length == 0" required>No data</option>
+                        <option *ngFor="let attribute of branchData" [value]="attribute.branchId" required>{{
+                            attribute.branchName }}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel" for="SelectList">Model:</td>
+                <td>
+                    <select name="model" formControlName="modelId" class="inputSelectBox" required>
+                        <option *ngIf="!modelData || modelData.length == 0" required>No data</option>
+                        <option *ngFor="let attribute of modelData" [value]="attribute.printerModelId" required>{{
+                            attribute.printerModelName }}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel" for="SelectList">Status:</td>
+                <td>
+                    <select name="status" formControlName="statusId" class="inputSelectBox" required>
+                        <option *ngIf="!statusData || statusData.length == 0" required>No data</option>
+                        <option *ngFor="let attribute of statusData" [value]="attribute.printerStatusId" required>{{
+                            attribute.printerStatusName }}</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <div class="btnReturnContainer">
+            <button class="btnReturn" (click)="back()">
+                <P class="btnReturnText">Return</P>
+            </button>
+        </div>
+
+        <div class="btnSubmitContainer">
+            <button class="btnSubmit" type="submit">
+                <P class="btnSubmitText">Update</P>
+            </button>
+        </div>
+    </form>
+</div>

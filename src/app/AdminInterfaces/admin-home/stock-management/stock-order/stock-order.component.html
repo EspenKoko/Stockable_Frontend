@@ -1,0 +1,93 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">{{ title }} Management</h2>
+    <br>
+    <div class="headerSection row">
+        <label class="lblInputLabel col-5" for="searchCriteria">{{ title }} Name:</label>
+        <div class="searchBoxContainter col-7">
+            <input type="text" class="inputSearchBox" placeholder="Enter {{ title }} Name" name="searchCriteria"
+                (keyup)="getStockItem()" [(ngModel)]="searchTerm">
+        </div>
+    </div>
+    <br>
+
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Stock Item</th>
+                    <th scope="col">Current Quantity</th>
+                    <th scope="col">To Be Rerdered</th>
+                    <th scope="col">Quantity After Order</th>
+                    <th scope="col">Unit Cost</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">Confirm Reorder</th>
+                    <th scope="col">Update Order</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="reorderList && reorderList.length > 0">
+                <tr scope="row" *ngFor="let attribute of reorderList, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.stock.stockName}}</td>
+                    <td>{{attribute.stock.qtyOnHand}}</td>
+                    <td>{{attribute.stockReoderQuantity}}</td>
+                    <td>{{attribute.stockQuantityToBe}}</td>
+                    <td>{{attribute.price | currency: 'R '}}</td>
+                    <td>{{attribute.stockReoderTotal | currency: 'R '}}</td>
+
+                    <!-- when first batch of code in stockServices is commented out change the IDs to attribute.stockOrderId -->
+                    <td><button class="btn btn-success"
+                            (click)="confirm(attribute)">Add Items</button></td>
+                    <!-- <td *ngIf="attribute.isConfirmed"><button class="btn btn-primary"
+                            routerLink="/place-stock-order">Confirmed</button></td> -->
+                    <td><button class="btn btn-primary" (click)="updateStock(attribute.stock.stockId)">Update</button>
+                    </td>
+
+                </tr>
+            </tbody>
+            <tr *ngIf="!reorderList || reorderList.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled type="button" type="button" routerLink="/">Confirm</button></td>
+                <td><button class="btn btn-primary" type="button" routerLink="/">Update</button></td>
+            </tr>
+            <tfoot>
+                <tr style="border-top: 1px solid black;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Grand Total:</strong></td>
+                    <td><strong>{{stockService.reorderTotal | currency: 'R '}}</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" type="button" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnOrder" routerLink="/create-mso">
+            <P class="btnSubmitText">Add New Order</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" type="button" routerLink="/place-stock-order">
+            <P class="btnSubmitText">Order Stock</P>
+        </button>
+    </div>
+</div>

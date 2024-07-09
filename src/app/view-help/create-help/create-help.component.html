@@ -1,0 +1,46 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="addForm" (ngSubmit)="Add()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">FAQ Reference:</td>
+                    <td><input type="text" name="type" formControlName="helpName" #type required>
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('helpName')?.dirty && addForm.get('helpName')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="addForm.get('helpName')?.touched && addForm.get('helpName')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain special characters.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">FAQ Description:</td>
+                    <td><textarea style="white-space: pre-line;" name="description"
+                            formControlName="helpDescription" #description required></textarea></td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('helpDescription')?.dirty && addForm.get('helpDescription')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+            </table>
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!addForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

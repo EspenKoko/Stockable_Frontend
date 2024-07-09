@@ -1,0 +1,47 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <h1 class="lblHeader2 card-title">Labour Rate Management</h1>
+        <br>
+        <h2 class="lblHeader2" *ngIf="amount > 0">Current Labour Rate = {{amount | currency: "R "}} p/h</h2>
+        <h2 class="lblHeader2" *ngIf="amount == 0">no current Labour Rate</h2>
+        <br>
+        <div class="centerContainer">
+            <form [formGroup]="addForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <td><label class="lblInputLabel">New Labour Rate:</label></td>
+                            <td><input type="number" min="1"
+                                    #Labour RateAmount formControlName="labourRate"></td>
+                        </tr>
+                        <tr
+                            *ngIf="addForm.get('labourRate')?.touched && addForm.get('labourRate')?.hasError('required')">
+                            <td></td>
+                            <td class="errorMsg">Field cannot be empty.</td>
+                        </tr>
+                        <tr *ngIf="addForm.get('labourRate')?.touched && addForm.get('labourRate')?.hasError('min')">
+                            <td></td>
+                            <td class="errorMsg">Rates cannot be less than 1.</td>
+                        </tr>
+                    </thead>
+                    <br>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="labourRateCells">
+                                <button class="btn btn-primary" (click)="Add()">{{"Create"}}</button>
+                                <button class="btn btn-danger" (click)="Delete()">{{"Delete"}}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+        <!-- <div class="btnSubmitContainer">
+            <button class="btnSubmit" routerLink="/view-labour-rate/labour-rate-history">
+                <P class="btnSubmitText">Labour Rate History</P>
+            </button>
+        </div> -->
+    </div>
+</div>

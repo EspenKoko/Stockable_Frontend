@@ -1,0 +1,35 @@
+<div class="viewPageBody">
+    <h1 class="lblHeader2">Dashboard</h1>
+    <br>
+    <div class="buttonGroup btn-group-vertical">
+
+        <div class="btnMenuItemContainer">
+            <button class="btnMenuItem" routerLink="/booked-in-printers">
+                <span class="btnMenuText">View Booked in Printers</span>
+            </button>
+        </div>
+        <div class="btnMenuItemContainer">
+            <button class="btnMenuItem" routerLink="/purchase-orders">
+                <span class="btnMenuText">View Purchase Orders</span>
+            </button>
+        </div>
+        <div class="btnMenuItemContainer">
+            <button class="btnMenuItem" routerLink="/technician-bookout-printer">
+                <span class="btnMenuText">Book Out Printer</span>
+            </button>
+        </div>
+        <br>
+        
+        <!-- seen by super admin -->
+        <div class="btnMenuItemContainer" *ngIf="service.getUserRoles().includes('SUPER_ADMIN')">
+            <button class="btnMenuItem" routerLink="/ifel">
+                <span class="btnMenuText">In-field-checklist</span>
+            </button>
+        </div>
+        <!-- <div class="btnMenuItemContainer" *ngIf="service.getUserRoles().includes('SUPER_ADMIN')">
+            <button class="btnMenuItem" routerLink="/reporting">
+                <span class="btnMenuText">Reporting</span>
+            </button>
+        </div> -->
+    </div>
+</div>

@@ -1,0 +1,132 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Update {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="parentForm" #form="ngForm" (ngSubmit)="edit()">
+            <table class="CRUDTable table table-borderless">
+                <div formGroupName="editStockForm" style="float: right;">
+                    <tr scope="row">
+                        <td class="lblInputLabel">Stock Item:</td>
+                        <td><input type="text" required name="name" formControlName="stockName">
+                        </td>
+                    </tr>
+                    <tr *ngIf="editForm.get('stockName')?.touched && editForm.get('stockName')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="editForm.get('stockName')?.touched && editForm.get('stockName')?.hasError('specialChar')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot contain special characters.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel" for="SelectList">{{title}} Type:</td>
+                        <td>
+                            <select name="stockType" formControlName="stockTypeId" class="inputSelectBox" required>
+                                <option *ngIf="!data || data.length == 0" required>No data</option>
+                                <option *ngFor="let attribute of data" [value]="attribute.stockTypeId" required>{{
+                                    attribute.stockTypeName }}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr
+                        *ngIf="editForm.get('stockTypeId')?.touched && editForm.get('stockTypeId')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Please select a stock type.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Description:</td>
+                        <td><input type="text" required name="description"
+                                formControlName="stockDescription"></td>
+                    </tr>
+                    <tr
+                        *ngIf="editForm.get('stockDescription')?.touched && editForm.get('stockDescription')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="editForm.get('stockDescription')?.touched && editForm.get('stockDescription')?.hasError('specialChar')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot contain special characters.</td>
+                    </tr>
+                    <!-- <tr scope="row">
+                <td class="lblInputLabel">QTY on hand:</td>
+                <td><input class="inputNumberSelecter" type="number" name="number" required formControlName="qtyOnHand">
+                </td>
+            </tr> 
+                    <tr *ngIf="editForm.get('qtyOnHand')?.touched && editForm.get('qtyOnHand')?.hasError('required')">
+                <td></td>
+                <td class="errorMsg">Field cannot be empty.</td>
+            </tr>
+            <tr *ngIf="editForm.get('qtyOnHand')?.touched && editForm.get('qtyOnHand')?.hasError('min')">
+                <td></td>
+                <td class="errorMsg">Value cannot be less than 0</td>
+            </tr> -->
+                    <tr scope="row">
+                        <td class="lblInputLabel">Mininmum Reorder Threshold:</td>
+                        <td><input class="inputNumberSelecter" type="number" name="number1" required
+                                formControlName="minStockThreshold">
+                        </td>
+                    </tr>
+                    <tr
+                        *ngIf="editForm.get('minStockThreshold')?.touched && editForm.get('minStockThreshold')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="editForm.get('minStockThreshold')?.touched && editForm.get('minStockThreshold')?.hasError('min')">
+                        <td></td>
+                        <td class="errorMsg">Value must be greater than 0</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Maximum Reorder Threshold:</td>
+                        <td><input class="inputNumberSelecter" type="number" name="number2" required
+                                formControlName="maxStockThreshold">
+                        </td>
+                    </tr>
+                    <tr
+                        *ngIf="editForm.get('maxStockThreshold')?.touched && editForm.get('maxStockThreshold')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="editForm.get('maxStockThreshold')?.touched && editForm.get('maxStockThreshold')?.hasError('min')">
+                        <td></td>
+                        <td class="errorMsg">Value must be greater than 0</td>
+                    </tr>
+                </div>
+
+                <div formGroupName="editPriceForm">
+                    <tr scope="row" style="float: right;">
+                        <td class="lblInputLabel">Price:</td>
+                        <td><input type="number" min="1" #name required name="name"
+                                formControlName="price">
+                        </td>
+                    </tr>
+                    <tr *ngIf="editPriceForm.get('price')?.touched && editPriceForm.get('price')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr *ngIf="editPriceForm.get('price')?.touched && editPriceForm.get('price')?.hasError('min')">
+                        <td></td>
+                        <td class="errorMsg">Value must be greater than 0</td>
+                    </tr>
+                </div>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!parentForm.valid">
+                    <P class="btnSubmitText">Update</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

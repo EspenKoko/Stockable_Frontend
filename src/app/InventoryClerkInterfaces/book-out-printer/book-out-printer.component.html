@@ -1,0 +1,36 @@
+<div class="card-body">
+  <div class="viewPageBody bg-light">
+    <br>
+    <h2 class="lblHeader2 card-title">Book out a Printer</h2>
+    <br>
+
+    <form class="inputTableContainter" [formGroup]="bookOutPrinterForm">
+      <table class="CRUDTable table table-borderless">
+
+        <tr scope="row">
+          <td class="lblInputLabel">Printer Serial Number</td>
+          <td>
+            <select class="inputSelectBox" name="error" required formControlName="errorLogId">
+              <option *ngIf="!Data || Data.length === 0" required>No Printers Ready To Be Booked Out</option>
+              <option *ngIf="Data && Data.length > 0" value="">Select a Printer</option>
+              <option *ngFor="let attribute of Data" [value]="attribute.errorLogId">
+                {{ attribute.errorLog.assignedPrinter.serialNumber }}
+              </option>
+            </select>
+          </td>
+        </tr>
+      </table>
+
+      <div class="buttonGroup">
+        <button class="btnFormReturn" (click)="back()">
+          <P class="btnReturnText">Return</P>
+        </button>
+
+        <button class="btnFormSubmit" (click)="submitBooking()">
+          <P class="btnSubmitText">Submit</P>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">{{title}} Management</h2>
+    <br>
+    <div class="headerSection row">
+        <label class="lblInputLabel col-5" for="searchCriteria">{{ title }} Name:</label>
+        <div class="searchBoxContainter col-7">
+            <input type="text" class="inputSearchBox" placeholder="Enter {{ title }} Name" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="GetCity()">
+        </div>
+    </div>
+    <br>
+
+    <div class="viewTableContainer">
+        <table class="viewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Province</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.cityName}}</td>
+                    <!-- <td>{{attribute.province.provinceName}}</td> -->
+                    <td>{{attribute.province.provinceName}}</td>
+                    <td><button class="btn btn-primary" type="button" [routerLink]="['/update-city', attribute.cityId]">Update</button></td>
+                    <!-- <td><button class="btn btn-danger" (click)="Delete(attribute.cityId)">Delete</button></td> -->
+                <td><button class="btn btn-danger" (click)="toggleConfirmButton(i, attribute.cityId)">{{attribute.confirmButton ? 'Confirm' : 'Delete'}}</button></td>
+            </tr>
+            </tbody>
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled type="button" routerLink="/update-city">Update</button></td>
+                <td><button class="btn btn-danger" disabled="disabled">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" routerLink="/create-city">
+            <P class="btnSubmitText">Add New {{title}}</P>
+        </button>
+    </div>

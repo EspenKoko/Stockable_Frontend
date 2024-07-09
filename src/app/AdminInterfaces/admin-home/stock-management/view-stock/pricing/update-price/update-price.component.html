@@ -1,0 +1,51 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Update {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="editForm" #form="ngForm" (ngSubmit)="edit()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Price:</td>
+                    <td><input type="number" min="1" required name="name" formControlName="price">
+                    </td>
+                </tr>
+                <tr *ngIf="editForm.get('price')?.dirty && editForm.get('price')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="editForm.get('price')?.dirty && editForm.get('price')?.hasError('min')">
+                    <td></td>
+                    <td class="errorMsg">Value must be greater than 0</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel" for="SelectList">{{title}} For Stock:</td>
+                    <td>
+                        <select name="stock" formControlName="stockId" class="inputSelectBox" required>
+                            <option *ngIf="!data || data.length == 0" required>No data</option>
+                            <option *ngFor="let attribute of data" [value]="attribute.stockId" required>{{
+                                attribute.stockName }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr *ngIf="editForm.get('stockId')?.touched && editForm.get('stockId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please select a stock item.</td>
+                </tr>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!editForm.valid">
+                    <P class="btnSubmitText">Update</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

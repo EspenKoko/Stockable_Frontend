@@ -1,0 +1,45 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">In Field Printer Errors</h2>
+    <br>
+
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Serial Number</th>
+                    <th scope="col">Logged By</th>
+                    <th scope="col">Error Code</th>
+                    <th scope="col">Date Logged</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.assignedPrinter.serialNumber}}</td>
+                    <td>{{attribute.clientUser.client.clientName}}</td>
+                    <td>{{attribute.errorCode.errorCodeName}}</td>
+                    <td>{{attribute.errorLogDate | date:'dd/MM/yyyy'}}</td>
+                    <td><button class="btn btn-primary" type="button"
+                            [routerLink]="['/in-field-checklist', attribute.errorLogId]">Assess</button></td>
+                </tr>
+            </tbody>
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled>Assess</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</div>

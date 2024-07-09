@@ -1,0 +1,54 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">Stock Take Management</h2>
+    <br>
+    <div class="nonViewTableContainer">
+        <form [formGroup]="stockTakeForm">
+            <table class="nonViewTable table table-striped table-light table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" style="width: 4%;">#</th>
+                        <th scope="col">Stock Name</th>
+                        <th scope="col">Stock category</th>
+                        <th scope="col">Stock type</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">QTY On Hand</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="data && data.length > 0">
+                    <tr scope="row" *ngFor="let attribute of data, let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{attribute.stockName}}</td>
+                        <td>{{attribute.stockType.stockCategory.stockCategoryName}}</td>
+                        <td>{{attribute.stockType.stockTypeName}}</td>
+                        <td>{{attribute.stockDescription}}</td>
+                        <td>{{attribute.qtyOnHand}}</td>
+                        <td><input type="number"></td>
+
+                    </tr>
+                </tbody>
+                <tr *ngIf="!data || data.length == 0">
+                    <td>#</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td>No Data</td>
+                    <td><input type="number" disabled></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" routerLink="/create-stock">
+            <P class="btnSubmitText">Submit</P>
+        </button>
+    </div>
+</div>

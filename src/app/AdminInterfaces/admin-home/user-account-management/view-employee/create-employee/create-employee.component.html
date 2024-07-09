@@ -1,0 +1,119 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="parentForm" (ngSubmit)="register()">
+            <table class="CRUDTable table table-borderless">
+                <div formGroupName="registerForm">
+                    <tr scope="row">
+                        <td class="lblInputLabel">First Name:</td>
+                        <td><input type="text" formControlName="userFirstName" #name></td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('userFirstName')?.touched && registerForm.get('userFirstName')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('userFirstName')?.touched && registerForm.get('userFirstName')?.hasError('specialChar')">
+                        <td></td>
+                        <td class="errorMsg">Field must not contain spaces or special characters.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Last Name:</td>
+                        <td><input type="text" formControlName="userLastName" #surname></td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('userLastName')?.touched && registerForm.get('userLastName')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('userLastName')?.touched && registerForm.get('userLastName')?.hasError('specialChar')">
+                        <td></td>
+                        <td class="errorMsg">Field must not contain spaces or special characters.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Email:</td>
+                        <td><input type="email" formControlName="emailaddress" #email></td>
+                    </tr>
+                    <tr *ngIf="registerForm.get('emailaddress')?.touched && registerForm.get('emailaddress')?.hasError('required')"
+                        class="errorMsg">
+                        <td></td>
+                        <td>Field cannot be empty</td>
+                    </tr>
+                    <tr *ngIf="registerForm.get('emailaddress')?.touched && registerForm.get('emailaddress')?.hasError('email')"
+                        class="errorMsg">
+                        <td></td>
+                        <td>Invalid email address</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Contact Number:</td>
+                        <td><input type="text" formControlName="phoneNumber" #number></td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty</td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.hasError('pattern')">
+                        <td></td>
+                        <td class="errorMsg">Please enter a valid 10-digit number with 0 as the starting digit.</td>
+                    </tr>
+                    <!-- <tr scope="row">
+                        <td class="lblInputLabel" for="SelectList">Role:</td>
+                        <td>
+                            <select class="inputSelectBox" formControlName="role" #selectList1>
+                                <option value="">Select a Role</option>
+                                <option value="ADMIN">Admin</option>
+                                <option value="TECHNICIAN">Technician</option>
+                                <option value="INVENTORY_CLERK">Inventory Clerk</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr *ngIf="registerForm.get('role')?.touched && registerForm.get('role')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Please select a role.</td>
+                    </tr> -->
+                </div>
+
+                <div formGroupName="employeeForm">
+                    <tr scope="row" style="float: right;">
+                        <td class="lblInputLabel" for="SelectList">{{title}} Type:</td>
+                        <td>
+                            <select name="selectEmployeeType" class="inputSelectBox" #selectList required
+                                formControlName="employeeTypeId">
+                                <option *ngIf="!data || data.length == 0" required>No data</option>
+                                <option *ngIf="data && data.length > 0" value="" required>Select Employee Type</option>
+                                <option *ngFor="let attribute of data" [value]="attribute.employeeTypeId">
+                                    {{attribute.employeeTypeName }}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr
+                        *ngIf="employeeForm.get('employeeTypeId')?.touched && employeeForm.get('employeeTypeId')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Please select an employee type.</td>
+                    </tr>
+                    
+                </div>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!parentForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

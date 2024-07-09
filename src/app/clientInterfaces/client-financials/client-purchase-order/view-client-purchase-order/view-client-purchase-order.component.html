@@ -1,0 +1,52 @@
+<div id="pdfToPrint">
+  <h2>View Purchase Order</h2>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="table-responsive" data-pattern="priority-columns">
+          <table class="table table-striped table-light">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th data-priority="1">Item</th>
+                <th data-priority="2">QTY</th>
+                <th data-priority="3">Unit price</th>
+                <th data-priority="4">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let attribute of data, let i = index">
+                <td>{{i+1}}</td>
+                <td>{{attribute.stock.stockName}}</td>
+                <td>{{attribute.qty}}</td>
+                <td>{{attribute.price?.price | currency: 'R '}}</td>
+                <td>{{attribute.price?.price * attribute.qty | currency: 'R '}}</td>
+              </tr>
+            </tbody>
+            <tfoot *ngIf="VAT">
+              <tr>
+                <td colspan="3" class="text-center">Total exl VAT</td>
+                <td colspan="2" class="text-center">{{VATExclusiveTotal | currency: 'R '}}</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="text-center">{{VAT.vatPercent * 100 + "%"}} VAT</td>
+                <td colspan="2" class="text-center">{{VATAmount | currency: 'R '}}</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="text-center">Total Due </td>
+                <td colspan="2" class="text-center">{{VATAmount + VATExclusiveTotal | currency: 'R '}}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="btnReturnContainer">
+  <button class="btnReturn" (click)="back()">
+    <P class="btnReturnText">Return</P>
+  </button>
+</div>

@@ -1,0 +1,82 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="addForm" (ngSubmit)="Add()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">{{title}} Name:</td>
+                    <td><input type="text" required name="branchName" formControlName="branchName">
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('branchName')?.touched && addForm.get('branchName')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="addForm.get('branchName')?.touched && addForm.get('branchName')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain special characters.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">{{title}} Code:</td>
+                    <td><input type="text" required name="branchCode" formControlName="branchCode">
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('branchCode')?.touched && addForm.get('branchCode')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="addForm.get('branchCode')?.touched && addForm.get('branchCode')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain special characters.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel" for="SelectList">{{title}} City:</td>
+                    <td>
+                        <select formControlName="cityId" class="inputSelectBox" required name="city">
+                            <option *ngIf="!cityData || cityData.length == 0" required>No data</option>
+                            <option *ngIf="cityData && cityData.length > 0" value="" required>Select City</option>
+                            <option *ngFor="let attribute of cityData" [value]="attribute.cityId" required>{{
+                                attribute.cityName }}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('cityId')?.touched && addForm.get('cityId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please select a city.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel" for="SelectList">Part Of:</td>
+                    <td>
+                        <select formControlName="clientId" class="inputSelectBox" required #selectClient name="client">
+                            <option *ngIf="!clientData || clientData.length == 0" required>No data</option>
+                            <option *ngIf="clientData && clientData.length > 0" value="" required>Select Client</option>
+                            <option *ngFor="let attribute of clientData" [value]="attribute.clientId" required>{{
+                                attribute.clientName }}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('clientId')?.touched && addForm.get('clientId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please select a client.</td>
+                </tr>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!addForm.valid">
+                    <P class="btnSubmitText">Create</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">Technical Service Reports</h2>
+    <br>
+    <div class="headerSection row">
+        <label class="lblInputLabel col-5" for="searchCriteria">{{ title }} Id:</label>
+        <div class="searchBoxContainter col-7">
+            <input type="text" class="inputSearchBox" placeholder="Enter {{ title }} Id" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="getTSR()">
+        </div>
+    </div>
+    <br>
+
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <!-- <th scope="col" style="width: 4%;">#</th> -->
+                    <th scope="col">TSR Id</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <!-- <td>{{i+1}}</td> -->
+                    <td>{{attribute.technicalServiceReportId}}</td>
+                    <td>{{attribute.purchaseOrder.purchaseOrderDate | date: 'dd/MM/yyyy'}}</td>
+                    <td><button class="btn btn-primary"
+                            [routerLink]="['/view-tsr', attribute.technicalServiceReportId]">View</button></td>
+                </tr>
+            </tbody>
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary">View</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</div>

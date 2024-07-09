@@ -1,0 +1,66 @@
+<div class="card-body">
+    <br>
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Error Details</h2>
+
+        <form class="inputTableContainter" [formGroup]="errorCodeLogForm">
+            <table class="CRUDTable table table-borderless">
+
+                <tr scope="row">
+                    <td class="lblInputLabel">Serial Number:</td>
+                    <td>
+                        <input value="{{serialNumber}}" type="text" readonly>
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Error Code:</td>
+                    <td>
+                        <select class="inputSelectBox" name="error" required formControlName="errorCodeId">
+                            <option *ngIf="!errorCodeData || errorCodeData.length == 0" required>No data</option>
+                            <option *ngIf="errorCodeData && errorCodeData.length > 0" value="" required>Select an Error Code</option>
+                            <option *ngFor="let attribute of errorCodeData" [value]="attribute.errorCodeId">
+                                {{attribute.errorCodeName}}</option>
+                        </select>
+                        <span class="requiredField">*</span>
+                    </td>
+                </tr>
+                <tr
+                    *ngIf="errorCodeLogForm.get('errorCodeId')?.touched && errorCodeLogForm.get('errorCodeId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please select an error code.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Date:</td>
+                    <td>
+                        <input type="date" formControlName="errorLogDate" readonly>
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Other Issues:</td>
+                    <td>
+                        <textarea formControlName="errorLogDescription"></textarea>
+                        <button type="button" class="btnToolHelp" matTooltip="Other issues is an optional field.
+                        Note that only on error needs to be logged as the other errors will be checked in the event the printer needs to
+                        be manually assessed by a technician." [matTooltipPosition]="'right'"
+                            [matTooltipShowDelay]="500" [matTooltipHideDelay]="1000"
+                            aria-label="Tooltip for help on log error">
+                            <P class="btnToolHelpPara">&#63;</P>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="buttonGroup">
+                <button class="btnFormReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+
+                <button class="btnFormSubmit" (click)="logError()" [disabled]="!errorCodeLogForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

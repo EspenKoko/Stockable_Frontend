@@ -1,0 +1,67 @@
+<div class="viewPageBody">
+  <br>
+  <h1 class="lblHeader2">System User Activity</h1>
+  <br>
+  <form>
+    <div class="headerSection row">
+      <label class="lblInputLabel col-5" for="searchCriteria">Search audit trail:</label>
+      <div class="searchBoxContainter col-7">
+        <input type="text" class="inputSearchBox" placeholder="Enter Action/Name/Id" [(ngModel)]="searchTerm"
+          name="searchCriteria" (keyup)="GetActivity()">
+      </div>
+      <div class="dateFilterSection row">
+        <p style=" color: orange; text-align: center;">Filter From:</p>
+        <input type="date" name="fromDate" (change)="GetActivity()" [(ngModel)]="fromSelectedSalePeriod">
+        <p style=" color: orange; text-align: center;">To:</p>
+        <input type="date" name="toDate" (change)="GetActivity()" [(ngModel)]="toSelectedSalePeriod">
+        <br>
+      </div>
+      <div class="clearButton">
+        <button class="btn btn-warning col-6" (click)="clearFilters()">Clear
+          Filters</button>
+        <!-- <button class="btn btn-primary col-6" (click)="GetActivity()">Search</button> -->
+      </div>
+    </div>
+  </form>
+  <br>
+
+  <div class="nonViewTableContainer">
+    <table class="nonViewTable table table-striped table-light">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Action</th>
+          <th scope="col">User name</th>
+          <th scope="col">User ID</th>
+          <th scope="col">Time actioned</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="data && data.length > 0">
+        <tr scope="row" *ngFor="let action of data, let i = index">
+          <td>{{i+1}}</td>
+          <td>{{action.userAction}}</td>
+          <td>{{action.userName}}</td>
+          <td>{{action.userId}}</td>
+          <td>{{action.date | date: 'dd/MM/yyy hh:mm:ss'}}</td>
+        </tr>
+      </tbody>
+      <tr *ngIf="!data || data.length == 0">
+        <td>#</td>
+        <td>No Data</td>
+        <td>No Data</td>
+        <td>No Data</td>
+        <td>No Data</td>
+      </tr>
+    </table>
+  </div>
+  <div class="btnReturnContainer">
+    <button class="btnReturn" (click)="back()">
+      <P class="btnReturnText">Return</P>
+    </button>
+  </div>
+  <div class="btnContinueContainer">
+    <button class="btnContinue" routerLink="/chat-support-records">
+      <P class="btnContinueText">Chatbot records</P>
+    </button>
+  </div>
+</div>

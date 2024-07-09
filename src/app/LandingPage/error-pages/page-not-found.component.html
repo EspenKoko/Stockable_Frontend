@@ -1,0 +1,40 @@
+<style>
+  * {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, rgb(35, 31, 31), orange);
+  }
+
+  h1 {
+    margin: 40px 0 20px;
+
+  }
+
+  .centerContainer {
+    height: 100%;
+  }
+</style>
+
+<body>
+
+  <div class="centerContainer">
+
+    <div class="icon"></div>
+    <div class="message">
+      <h1>Page not found</h1>
+      <p>Please check with the site admin if you believe this is a mistake. <a href="#" (click)="back($event)">Return</a></p>
+    </div>
+
+  </div>
+</body>

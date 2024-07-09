@@ -1,0 +1,50 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">Outstanding Payments</h2>
+    <br>
+
+    <!-- modify table headers and rows accordingly -->
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Repair For Printer</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Amount Due</th>
+                    <th scope="col">Invoice</th>
+                    <th scope="col">Pay</th>
+                </tr>
+            </thead>
+            <!-- rows for when api is connected and there is data being sent through successfully -->
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.repair.errorLog.assignedPrinter.serialNumber}}</td>
+                    <td>{{attribute.purchaseOrderDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{attribute.TotalExVat + attribute.vatTotal | currency: 'R '}}</td>
+                    <td><button class="btn btn-primary"
+                            [routerLink]="['/view-invoice', attribute.purchaseOrderId]">View Invoice</button></td>
+                    <td><button class="btn btn-primary"
+                            (click)="doOnSitePayment(attribute)">Make Payment</button></td>
+                </tr>
+            </tbody>
+            <!-- default row when no data in api or api is not connected -->
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" routerLink="" disabled>View Invoice</button></td>
+                <td><button class="btn btn-secondary" disabled>Make Payment</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- this container is always for return and back button -->
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</div>

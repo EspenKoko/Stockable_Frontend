@@ -1,0 +1,49 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">Assign a technician to job number: {{"ER" + errorLogData?.errorLogId + errorLogData?.clientUser.clientId}}</h2>
+    <br>
+    <div class="headerSection row">
+        <div class="searchBoxContainter col-12">
+            <input type="text" class="inputSearchBox" placeholder="Enter Technician Name" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="GetEmployee()">
+        </div>
+    </div>
+    <br>
+
+    <div class="nonViewTableContainer">
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Technician Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.user.userFirstName + " " + attribute.user.userLastName}}</td>
+                    <td>{{attribute.user.email}}</td>
+                    <td>{{attribute.user.phoneNumber}}</td>
+                    <td><button class="btn btn-primary" type="button" (click)="assign(attribute)">Assign</button></td>
+                    <!-- <td><button class="btn btn-primary" type="button" (click)="toggleAssignUnassign(attribute)">
+                        {{ assignedEmployees?.includes(attribute.employeeId) ? 'Unassign' : 'Assign' }}
+                      </button></td> -->
+                </tr>
+            </tbody>
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled type="button">Assign</button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()" *ngIf="showComponent">
+            <P class="btnReturnText">Return Home</P>
+        </button>
+    </div>
+</div>

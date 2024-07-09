@@ -1,0 +1,78 @@
+<body style="flex-direction: column;">
+
+    <div class="centerContainer" *ngIf="service.isAuthenticated()">
+        <div>
+            <img src="/assets/download.jpeg" alt="ACS Logo" class="logo-image">
+        </div>
+        <br>
+        <br>
+        <br>
+        <button class="btnNav" (click)="navigate()">Proceed to Dashboard</button>
+    </div>
+    <br>
+    <div class="main" *ngIf="!service.isAuthenticated()">
+        <input type="checkbox" id="chk" aria-hidden="true" [(ngModel)]="isChecked" (click)="checkBox()">
+
+        <div class="login">
+            <form [formGroup]="loginForm" (ngSubmit)="triggerTwoFactAuth()" *ngIf="!emailSent">
+                <!-- <form [formGroup]="loginForm" (ngSubmit)="login()" *ngIf="!emailSent"> -->
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="text" name="txt" placeholder="Username or Email" required=""
+                    formControlName="emailaddress">
+                <input type="password" name="pswd" placeholder="Password" required="" formControlName="password">
+                <button type="submit" class="btnSignIn">
+                    <span>Login</span>
+                    <span class="btnLoader" *ngIf="isLoading"></span>
+                </button>
+            </form>
+
+            <form *ngIf="emailSent" [formGroup]="twoFactorForm" (ngSubmit)="login()">
+                <label for="chk" class="lblTwoFactor" aria-hidden="true">Enter Two Factor Code</label>
+                <div class="twoFactorForm">
+                    <input type="number" name="number1" class="twoFactorInput" min="0" max="9" formControlName="number1"
+                        maxlength="1" (input)="moveCursor($event, 'number2')">
+                    <input type="number" name="number2" class="twoFactorInput" min="0" max="9" formControlName="number2"
+                        maxlength="1" (input)="moveCursor($event, 'number3')">
+                    <input type="number" name="number3" class="twoFactorInput" min="0" max="9" formControlName="number3"
+                        maxlength="1" (input)="moveCursor($event, 'number4')">
+                    <input type="number" name="number4" class="twoFactorInput" min="0" max="9" formControlName="number4"
+                        maxlength="1" (input)="moveCursor($event, 'number5')">
+                    <input type="number" name="number5" class="twoFactorInput" min="0" max="9" maxlength="1"
+                        formControlName="number5" (input)="login()">
+                </div>
+
+                <button class="btnSignIn" (click)="emailSent = false">Return</button>
+                <button type="submit" class="btnSignIn">
+                    <span>Continue</span>
+                </button>
+                <div class="lblResendCodeContainer">
+                    <p class="lblResendCode" (click)="sendMail()">Resend Code</p>
+                    <span class="btnLoader loader2" *ngIf="isLoading"></span>
+                </div>
+            </form>
+        </div>
+
+        <div class="signup" *ngIf="!emailSent">
+            <label for="chk" aria-hidden="true">More Info</label>
+            <div class="centerContainer">
+                <div class="linkContainer">
+                    <a class="signUpLink" (click)="moreInfoNav()">More on ACS</a>
+                    <br>
+                    <a class="signUpLink" (click)="forgotPasswordNav()">Forgot Password</a>
+                </div>
+                <br>
+                <router-outlet></router-outlet>
+            </div>
+
+            <!-- always false -->
+            <form [formGroup]="registerForm" (ngSubmit)="register()" *ngIf="!true">
+                <label for="chk" aria-hidden="true">Sign Up</label>
+                <input type="email" name="email" placeholder="Email" required="" formControlName="emailaddress">
+                <input type="password" name="pswd" placeholder="Password" required="" formControlName="password">
+                <!-- <input type="password" name="cpswd" placeholder="Confirm Password" required=""> -->
+                <button type="submit" class="btnSignUp">Sign up</button>
+            </form>
+            <h5>{{signUpText}}</h5>
+        </div>
+    </div>
+</body>

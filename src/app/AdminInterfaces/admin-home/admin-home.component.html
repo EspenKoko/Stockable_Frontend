@@ -1,0 +1,126 @@
+<body id="dashboardBody">
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <br>
+    <h1 class="lblHeader1 card-title" (click)="reloadPage()">Dashboard</h1>
+    <br>
+    <div class="dashboard container-fluid">
+
+        <div class="row justify-content-md-center">
+            <div class="dashboardTab col-md-2 dashTextContainer" routerLink="/admin-error-log">
+                <h2>Error logs</h2>
+                <br>
+                <p class="dashText" *ngIf="!errorLogData || errorLogData.length == 0">No new errors logged by
+                    clients</p>
+                <p class="dashText" *ngIf="errorLogData && errorLogData.length > 0">There are <span
+                        style="color: red;">{{errorLogData.length}}</span> new error(s) logged by clients</p>
+            </div>
+            <div class="dashboardTab col-md-6" routerLink="/stock-report">
+                <canvas id="stockChart"></canvas>
+                <!-- <canvas *ngIf="stockData && stockData.length != 0" id="stockChart"></canvas>
+                <p *ngIf="!stockData || stockData.length == 0">No stock on hand at the moment, try refresh</p> -->
+            </div>
+            <div class="dashboardTab col-md-auto dashTextContainer" routerLink="/view-employee">
+                <h2>Staff</h2>
+                <br>
+                <p class="dashText" *ngIf="!staffData || staffData.length == 0">No employees on the system</p>
+                <p class="dashText" *ngIf="staffData && staffData.length > 0">There are
+                    <span>{{staffData.length}}</span> employee(s) on the system
+                </p>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+            <div class="dashboardTab col-md-12" routerLink="/stock-order">
+                <div class="centerContainer">
+                    <h1 class="lblHeader3" style="color:white">Stock To Reorder</h1>
+                    <br>
+                    <div class="table1">
+                        <table class="nonViewTable table table-striped table-light">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Stock Item</th>
+                                    <th scope="col">current Quantity</th>
+                                    <th scope="col">To Be Rerdered</th>
+                                    <th scope="col">Quantity After Order</th>
+                                    <th scope="col">Unit Cost</th>
+                                    <th scope="col">Total Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="reorderList && reorderList.length > 0">
+                                <tr scope="row" *ngFor="let attribute of reorderList, let i = index">
+                                    <td>{{attribute.stock.stockName}}</td>
+                                    <td>{{attribute.stock.qtyOnHand}}</td>
+                                    <td>{{attribute.stockReoderQuantity}}</td>
+                                    <td>{{attribute.stockQuantityToBe}}</td>
+                                    <td>{{attribute.price | currency: 'R '}}</td>
+                                    <td>{{attribute.stockReoderTotal | currency: 'R '}}</td>
+                                </tr>
+                            </tbody>
+                            <tr *ngIf="!reorderList || reorderList.length == 0">
+                                <td>No Data</td>
+                                <td>No Data</td>
+                                <td>No Data</td>
+                                <td>No Data</td>
+                                <td>No Data</td>
+                                <td>No Data</td>
+                            </tr>
+                            <tfoot>
+                                <tr style="border-top: 1px solid black;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Grand Total:</strong></td>
+                                    <td><strong>{{stockService.reorderTotal | currency: 'R '}}</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+            <div class="dashboardTab col" routerLink="/repair-report">
+                <canvas id="repairStatusChart"></canvas>
+                <!-- <canvas *ngIf="repairData && repairData.length != 0" id="repairStatusChart"></canvas>
+                <p *ngIf="!repairData || repairData.length == 0">No repairs in progress, try refresh</p> -->
+            </div>
+            <div class="dashboardTab col" routerLink="/audit-trail">
+                <div class="centerContainer dashboardTable">
+                    <h1 class="lblHeader3" style="color:white">Recent Actions</h1>
+                    <br>
+                    <div class="table2">
+                        <table class="nonViewTable table table-striped table-light">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Time Actioned</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="auditTrail && auditTrail.length > 0">
+                                <tr scope="row" *ngFor="let attribute of auditTrail, let i = index">
+                                    <td>{{attribute.userAction}}</td>
+                                    <td>{{attribute.userName}}</td>
+                                    <td>{{attribute.date | date: "dd/MM/yyy hh:mm:ss"}}</td>
+                                </tr>
+                            </tbody>
+                            <tr *ngIf="!auditTrail || auditTrail.length == 0">
+                                <td>No Data</td>
+                                <td>No Data</td>
+                                <td>No Data</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+</body>

@@ -1,0 +1,53 @@
+<!-- <div class="viewPageBody"> -->
+<br>
+<h1 class="lblHeader2">Remote Troubleshoot Checklist</h1>
+<br>
+<div class="divForm">
+
+    <form action="" [formGroup]="remoteChecklist">
+        <label class="form-control" [formGroup]="remoteChecklist">
+            <input type="checkbox" name="checkbox" formControlName="Restarted"/>
+            Has the printer been restarted?
+        </label>
+
+        <label class="form-control">
+            <input type="checkbox" name="checkbox" formControlName="NetworkCheck"/>
+            Is the network cable plugged in to the printer?
+        </label>
+
+        <label class="form-control">
+            <input type="checkbox" name="checkbox" formControlName="PrinterCleaned"/>
+            Has the printer been cleaned?
+        </label>
+
+        <label class="form-control">
+            <input type="checkbox" name="checkbox" formControlName="IndentCatridgeViable"/>
+            Is the indent cartridge still viable?
+        </label>
+
+        <label class="form-control">
+            <input type="checkbox" name="checkbox" formControlName="PrintingFoilViable"/>
+            Is the printing foil still viable?
+        </label>
+
+        <div class="btnReturnContainer">
+            <button class="btnReturn" (click)="back()">
+                <P class="btnReturnText">Return</P>
+            </button>
+        </div>
+
+        <div class="btnSubmitContainer">
+            <button class="btnSecondary" (click)="printerNotFixed()">
+                <P class="btnSubmitText">Issue Not Resolved</P>
+            </button>
+        </div>
+
+        <div class="btnSubmitContainer">
+            <button class="btnSubmit" (click)="printerFixed()">
+                <P class="btnSubmitText">Issue Resolved</P>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- </div> -->

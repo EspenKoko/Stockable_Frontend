@@ -1,0 +1,49 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <h2 class="lblHeader2 card-title">Exchange Printer</h2>
+        <br>
+        <form class="inputTableContainter" #form="ngForm" (ngSubmit)="editBranch()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Client:</td>
+                    <td>
+                        <input type="text" readonly [value]="branchData?.client?.clientName">
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Branch:</td>
+                    <td>
+                        <input type="text" readonly [value]="branchData?.branchName">
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Branch:</td>
+                    <td>
+                        <input type="text" readonly [value]="branchData?.branchName">
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Printer To Exchange:</td>
+                    <td>
+                        <select class="inputSelectBox" name="printer" required [(ngModel)]="printerSelection">
+                            <option *ngIf="!printerData || printerData.length == 0" required>No data</option>
+                            <option *ngIf="printerData && printerData.length > 0" value="" required>Select a printer
+                            </option>
+                            <option *ngFor="let attribute of printerData" [ngValue]="attribute">
+                                {{attribute.serialNumber}}</option>
+                        </select>
+                        <span class="requiredField">*</span>
+                    </td>
+                </tr>
+            </table>
+
+            <button class="btnReturn" (click)="back()">
+                <P class="btnReturnText">Return</P>
+            </button>
+
+            <button class="btnSubmit" type="submit">
+                <P class="btnSubmitText">Exchange</P>
+            </button>
+        </form>
+    </div>
+</div>

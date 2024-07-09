@@ -1,0 +1,25 @@
+.diagnosticTable{
+    padding: 5% 10% 5% 10%;
+}
+
+.form-control {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.1;
+    width: 13rem;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+    border: 0px transparent;
+}
+
+//   .form-control--disabled {
+//     color: var(--form-control-disabled);
+//     cursor: not-allowed;
+//   }
+
+textarea{
+    width: 80%;
+    max-width: 300px;
+    max-height: max-content;
+}

@@ -1,0 +1,189 @@
+<div class="viewPageBody">
+    <br>
+    <h1 class="lblHeader2">Stock Order Summary</h1>
+    <br>
+    <div class="orderBody" [formGroup]="supplierOrderForm">
+        <div class="row" style="gap: 20px;">
+            <h3 class="lblInputLabel" for="SelectList">Select a supplier to order from:</h3>
+            <select name="selectSupplier" class="inputSelectBox" required name="type" formControlName="supplierId">
+                <option *ngIf="!data || data.length == 0" required>No data</option>
+                <!-- <option *ngIf="data && data.length > 0" value="" required>Select a supplier</option> -->
+                <option *ngFor="let attribute of data" [value]="attribute.supplierId">
+                    {{attribute.supplierName }}
+                </option>
+            </select>
+        </div>
+
+        <main class="st_viewport">
+            <div class="st_wrap_table" data-table_id="0">
+                <header class="st_table_header">
+                    <h2>Consumables</h2>
+                    <div class="st_row">
+                        <div class="st_column _rank">#</div>
+                        <div class="st_column _name">Item Name</div>
+                        <div class="st_column _qty">QTY</div>
+                        <div class="st_column _price">Unit Price</div>
+                        <div class="st_column _total">Total</div>
+                        <div class="st_column _delete">Select Item</div>
+                    </div>
+                </header>
+                <div class="st_table">
+                    <div class="st_row" *ngIf="!consumables || consumables.length == 0">
+                        <div class="st_column _rank">#</div>
+                        <div class="st_column _name">No Data</div>
+                        <div class="st_column _qty">No Data</div>
+                        <div class="st_column _price">No Data</div>
+                        <div class="st_column _total">No Data</div>
+                        <div class="st_column _delete"></div>
+                    </div>
+                    <div class="st_row" *ngFor="let attribute of consumables, let i = index">
+                        <div class="st_column _rank">{{i+1}}</div>
+                        <div class="st_column _name">{{attribute.spOrder.stock.stockName}}</div>
+                        <div class="st_column _qty">{{attribute.spOrder.qty}}</div>
+                        <div class="st_column _price">{{attribute.price?.price | currency: 'R '}}</div>
+                        <div class="st_column _total">{{attribute.price?.price * attribute.spOrder.qty | currency: 'R '}}
+                        </div>
+                        <div class="st_column _delete"> <input type="checkbox" name="checkbox"
+                                (change)="toggleSelection(attribute)" /></div>
+                    </div>
+                    <div class="st_row">
+                        <div class="st_column _rank"></div>
+                        <div class="st_column _name"></div>
+                        <div class="st_column _qty"></div>
+                        <div class="st_column _price"><strong>Consumables Total:</strong></div>
+                        <div class="st_column _total"><strong>{{consumableTotal | currency: 'R '}}</strong></div>
+                        <div class="st_column _delete"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="st_wrap_table" data-table_id="1">
+                <header class="st_table_header">
+                    <h2>Parts</h2>
+                    <div class="st_row">
+                        <div class="st_column _rank">#</div>
+                        <div class="st_column _name">Part No.</div>
+                        <div class="st_column _qty">QTY</div>
+                        <div class="st_column _price">Unit Price</div>
+                        <div class="st_column _total">Total</div>
+                        <div class="st_column _delete">Select Item</div>
+                    </div>
+                </header>
+                <div class="st_table">
+                    <div class="st_row" *ngIf="!parts || parts.length == 0">
+                        <div class="st_column _rank">#</div>
+                        <div class="st_column _name">No Data</div>
+                        <div class="st_column _qty">No Data</div>
+                        <div class="st_column _price">No Data</div>
+                        <div class="st_column _total">No Data</div>
+                        <div class="st_column _delete"></div>
+                    </div>
+                    <div class="st_row" *ngFor="let attribute of parts, let i = index">
+                        <div class="st_column _rank">{{i+1}}</div>
+                        <div class="st_column _name">{{attribute.spOrder.stock.stockName}}</div>
+                        <div class="st_column _qty">{{attribute.spOrder.qty}}</div>
+                        <div class="st_column _price">{{attribute.price?.price | currency: 'R '}}</div>
+                        <div class="st_column _total">{{attribute.price?.price * attribute.spOrder.qty | currency: 'R
+                            '}}
+                        </div>
+                        <div class="st_column _delete"> <input type="checkbox" name="checkbox"
+                                (change)="toggleSelection(attribute)" /></div>
+                    </div>
+                    <div class="st_row">
+                        <div class="st_column _rank"></div>
+                        <div class="st_column _name"></div>
+                        <div class="st_column _qty"></div>
+                        <div class="st_column _price"><strong>Parts Total:</strong></div>
+                        <div class="st_column _total"><strong>{{partTotal | currency: 'R '}}</strong></div>
+                        <div class="st_column _delete"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="st_wrap_table" data-table_id="2">
+                <header class="st_table_header">
+                    <h2>Printers</h2>
+                    <div class="st_row">
+                        <div class="st_column _rank">#</div>
+                        <div class="st_column _name">Printer Model</div>
+                        <div class="st_column _qty">QTY</div>
+                        <div class="st_column _price">Unit Price</div>
+                        <div class="st_column _total">Total</div>
+                        <div class="st_column _delete">Select Item</div>
+                    </div>
+                </header>
+                <div class="st_table">
+                    <div class="st_row" *ngIf="!printers || printers.length == 0">
+                        <div class="st_column _rank">#</div>
+                        <div class="st_column _name">No Data</div>
+                        <div class="st_column _qty">No Data</div>
+                        <div class="st_column _price">No Data</div>
+                        <div class="st_column _total">No Data</div>
+                        <div class="st_column _delete"></div>
+                    </div>
+                    <div class="st_row" *ngFor="let attribute of printers, let i = index">
+                        <div class="st_column _rank">{{i+1}}</div>
+                        <div class="st_column _name">{{attribute.spOrder.stock.stockName}}</div>
+                        <div class="st_column _qty">{{attribute.spOrder.qty}}</div>
+                        <div class="st_column _price">{{attribute.price?.price | currency: 'R '}}</div>
+                        <div class="st_column _total">{{attribute.price?.price * attribute.spOrder.qty | currency: 'R
+                            '}}
+                        </div>
+                        <div class="st_column _delete"> <input type="checkbox" name="checkbox"
+                                (change)="toggleSelection(attribute)" /></div>
+                    </div>
+                    <div class="st_row">
+                        <div class="st_column _rank"></div>
+                        <div class="st_column _name"></div>
+                        <div class="st_column _qty"></div>
+                        <div class="st_column _price"><strong>Printer Total:</strong></div>
+                        <div class="st_column _total"><strong>{{printerTotal | currency: 'R '}}</strong></div>
+                        <div class="st_column _delete"></div>
+                    </div>
+                </div>
+            </div>
+            <footer class=".st_table_footer" *ngIf="VAT">
+                <div class="st_table">
+                    <div class="st_row" style="background-color: black; color: white;">
+                        <div class="st_column _rank"></div>
+                        <div class="st_column _name"></div>
+                        <div class="st_column _qty"></div>
+                        <div class="st_column _price">Vat Exlusive:</div>
+                        <div class="st_column _total">{{grandTotal - grandTotalVat | currency: 'R '}}</div>
+                        <div class="st_column _delete"><input class="btn btn-danger" type="button" value="Clear Orders"
+                                (click)="deleteSelection($event)"></div> <!-- must be changed to Delete selection -->
+                    </div>
+                    <div class="st_row" style="background-color: black; color: white;">
+                        <div class="st_column _rank"></div>
+                        <div class="st_column _name"></div>
+                        <div class="st_column _qty"></div>
+                        <div class="st_column _price">Vat ({{VAT.vatPercent * 100 + "%"}}): </div>
+                        <div class="st_column _total">{{grandTotalVat | currency: 'R '}}</div>
+                        <div class="st_column _delete"></div>
+                    </div>
+                    <div class="st_row" style="background-color: black; color: white;">
+                        <div class="st_column _rank"></div>
+                        <div class="st_column _name"></div>
+                        <div class="st_column _qty"></div>
+                        <div class="st_column _price">Grand Total:</div>
+                        <div class="st_column _total">{{grandTotal | currency: 'R '}}</div>
+                        <div class="st_column _delete"></div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <br><br><br>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" type="button" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" type="submit" (click)="placeOrder()" [disabled]="!supplierOrderForm.valid">
+            <P class="btnSubmitText">Place Order</P>
+        </button>
+    </div>
+    <br>
+</div>

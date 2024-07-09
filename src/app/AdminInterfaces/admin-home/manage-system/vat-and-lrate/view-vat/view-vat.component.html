@@ -1,0 +1,51 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <h1 class="lblHeader2 card-title">Vat Management</h1>
+        <br>
+        <h2 class="lblHeader2" *ngIf="amount > 0">Current VAT Amount = {{amount*100}}%</h2>
+        <h2 class="lblHeader2" *ngIf="amount == 0">no current VAT percentage</h2>
+        <br>
+        <div class="centerContainer">
+            <form [formGroup]="addForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <td><label class="lblInputLabel">New VAT percent:</label></td>
+                            <td><input type="number" min="1" max="100"
+                                    #vatAmount formControlName="vatPercent"></td>
+                        </tr>
+                        <tr
+                            *ngIf="addForm.get('vatPercent')?.touched && addForm.get('vatPercent')?.hasError('required')">
+                            <td></td>
+                            <td class="errorMsg">Field cannot be empty.</td>
+                        </tr>
+                        <tr *ngIf="addForm.get('vatPercent')?.touched && addForm.get('vatPercent')?.hasError('min')">
+                            <td></td>
+                            <td class="errorMsg">Percent cannot be less than 1.</td>
+                        </tr>
+                        <tr *ngIf="addForm.get('vatPercent')?.touched && addForm.get('vatPercent')?.hasError('max')">
+                            <td></td>
+                            <td class="errorMsg">Percent cannot be great than 99.</td>
+                        </tr>
+                    </thead>
+                    <br>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="VatCells">
+                                <button class="btn btn-primary" (click)="Add()">{{"Create"}}</button>
+                                <button class="btn btn-danger" (click)="Delete()">{{"Delete"}}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+        <!-- <div class="btnSubmitContainer">
+            <button class="btnSubmit" routerLink="/view-vat/vat-history">
+                <P class="btnSubmitText">VAT History</P>
+            </button>
+        </div> -->
+    </div>
+</div>

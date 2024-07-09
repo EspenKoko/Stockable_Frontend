@@ -1,0 +1,42 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Book Out Stock</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="stockForm">
+            <table class="CRUDTable table table-borderless">
+
+                <tr scope="row">
+                    <td class="lblInputLabel">Stock Item:</td>
+                    <td>
+                        <select class="inputSelectBox" name="stock" required formControlName="stockId">
+                            <option *ngIf="!stockData || stockData.length == 0" required>No data</option>
+                            <option *ngIf="stockData && stockData.length > 0" value="" required>Select a stock Item
+                            </option>
+                            <option *ngFor="let attribute of stockData" [value]="attribute.stockId">
+                                {{attribute.stockName}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Quantity:</td>
+                    <td>
+                        <input type="number" formControlName="qtyOnHand" min="1">
+                    </td>
+                </tr>
+            </table>
+
+            <div class="buttonGroup">
+                <button class="btnFormReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+
+                <button class="btnFormSubmit" (click)="submitBooking()">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="viewPageBody">
+    <br>
+    <h1 class="lblHeader2 card-title">View Parts Request</h1>
+    <br>
+
+    <div class="centerContainer">
+        <h1> Printer Serial Number: {{printerSerialNumber}} </h1>
+        
+        <table class="nonViewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" style="width: 4%;">#</th>
+                <th scope="col">Stock Name</th>
+                <th scope="col">Stock Type</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr scope="row" *ngFor="let stock of data; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{ stock.stock.stockName }}</td>
+                <td>{{ stock.stock.stockType.stockTypeName }}</td>
+                <td>{{ data[i].qty }}</td>
+                <!-- Note the addition of the [disabled] attribute -->
+                <button class="btn btn-primary" type="button" (click)="bookOutPart(stock.stockId, data[i].qty, i)" [disabled]="isButtonDisabled[i]">Book out part</button>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" (click)="Complete()">
+            <P class="btnSubmitText">Complete</P>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<body>
+    <br>
+    <h2 class="lblHeader2 card-title">Select Category to View</h2>
+    <br>
+    <div class="centerContainer">
+        <div class="buttonGroup btn-group btn-group-toggle" data-toggle="buttons">
+            <button class="btn" routerLink="/view-vat">Vat</button>
+            <button class="btn" routerLink="/view-labour-rate">Labour Rate</button>
+            <button class="btn" routerLink="/view-markup">Product Markup</button>
+        </div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</body>

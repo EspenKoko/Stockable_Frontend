@@ -1,0 +1,229 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.viewPageBody {
+  padding-top: 100px;
+}
+
+.orderBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+// select option {
+//   background-color: #f2f2f2;
+//   color: #333;
+//   font-size: 20px;
+//   padding: 5px;
+// }
+
+.st_viewport {
+  max-height: 750px;
+  width: 750px;
+  overflow: auto;
+}
+
+[data-table_id="0"] {
+  background-color: rgb(255, 115, 0);
+}
+
+[data-table_id="1"] {
+  background-color: rgb(61, 53, 39);
+  color: rgb(220, 220, 220);
+}
+
+[data-table_id="2"] {
+  background-color: rgba(168, 189, 4, .8);
+}
+
+._rank {
+  // width: 100%;
+  min-width: 50px;
+}
+
+._name {
+  // width: 100%;
+  min-width: 170px;
+}
+
+._qty {
+  // width: 100%;
+  min-width: 100px;
+}
+
+._price {
+  // width: 100%;
+  min-width: 150px;
+}
+
+._total {
+  // width: 100%;
+  min-width: 150px;
+}
+
+._delete {
+  // width: 100%;
+  min-width: 90px;
+}
+
+pre {
+  overflow: auto;
+}
+
+/** Sticky table styles **/
+.st_viewport {
+  // background-color: rgb(62, 148, 236);
+  color: rgb(27, 30, 36);
+  margin: 20px 0;
+}
+
+/* ###  Table wrap */
+//   .st_wrap_table{
+
+//   }
+/* ##   header */
+.st_table_header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: rgb(27, 30, 36);
+  color: rgb(220, 220, 220);
+}
+
+.st_table_header h2 {
+  font-weight: 400;
+  margin: 0 20px;
+  padding: 20px 0 0;
+}
+
+.st_table_header .st_row {
+  color: rgba(220, 220, 220, .7);
+}
+
+//   .st_table_header .st_column{
+
+//   }
+/* ##   footer */
+.st_table_footer {
+  position: sticky;
+  bottom: 0px;
+  z-index: 1;
+  background-color: rgb(27, 30, 36);
+  color: rgb(220, 220, 220);
+}
+
+/* ##  table */
+.st_table {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+/* #   row */
+.st_row {
+  // width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+}
+
+.st_table .st_row:nth-child(even) {
+  background-color: rgba(0, 0, 0, .1)
+}
+
+/* #   column */
+.st_column {
+  padding: 10px 20px;
+}
+
+.orderHeader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 35%;
+}
+
+.businessDetailsSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.1;
+  width: 20rem;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 1em;
+  border: 0px transparent;
+  text-align: left;
+}
+
+.form-control+.form-control {
+  margin-top: 1em;
+}
+
+//   .form-control--disabled {
+//     color: var(--form-control-disabled);
+//     cursor: not-allowed;
+//   }
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  // /* For iOS < 15 */
+  // background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}

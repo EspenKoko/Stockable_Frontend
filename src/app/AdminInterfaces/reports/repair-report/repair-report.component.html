@@ -1,0 +1,55 @@
+<div class="reportBody">
+  <div class="centerContainer card-body">
+    <div id="pdfToPrint">
+      <br>
+      <div style="display: flex; justify-content: center; align-items: center; gap: 4rem; padding: 0 1rem 0 1rem;">
+        <h1 class="lblHeader1 card-title">Repair Report</h1>
+      </div>
+      <br>
+      <div class="dateContainer" style="text-align: right; padding: 0 1rem;">
+        <p>{{ this.date }}</p>
+      </div>
+      <br>
+      <div class="descriptionContainer" style="padding: 0 1rem; max-width: 800px; margin: 0 auto;">
+        <p>This report presents a comprehensive analysis of ongoing repairs within the system, displayed in the form of
+          a pie chart. The chart illustrates the distribution of repairs across various stages of the repair process.
+        </p>
+      </div>
+      <!-- <div class="watermark"></div> -->
+      <br>
+      <div class="chart-table-container" style="display: flex; justify-content: center; align-items: flex-start;">
+        <div class="chart-container">
+          <canvas id="repairStatusChart" width="800" height="600"></canvas>
+        </div>
+        <!-- <div class="table-container" style="border: 1px solid #ccc; padding: 10px;">
+          <table class="reportTable table table-light">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of statusTableData, let i = index">
+                <td>{{ item.label }}</td>
+                <td>{{ item.value }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+      </div>
+    </div>
+    <br>
+    <div class="linkFooter">
+      <button class="btnContinue" (click)="downloadAsPDF()">
+        <span>Download</span><span>PDF</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="btnReturnContainer">
+    <button class="btnReturn" (click)="back()">
+      <P class="btnReturnText">Return</P>
+    </button>
+  </div>
+</div>

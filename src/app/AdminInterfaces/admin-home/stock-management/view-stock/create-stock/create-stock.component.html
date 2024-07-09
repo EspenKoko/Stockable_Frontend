@@ -1,0 +1,155 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="parentForm" (ngSubmit)="Add()">
+            <table class="CRUDTable table table-borderless">
+                <div formGroupName="addStockForm">
+                    <tr scope="row">
+                        <td class="lblInputLabel">Name:</td>
+                        <td><input type="text" #name required name="name" formControlName="stockName"></td>
+                    </tr>
+                    <tr *ngIf="addForm.get('stockName')?.touched && addForm.get('stockName')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr *ngIf="addForm.get('stockName')?.touched && addForm.get('stockName')?.hasError('specialChar')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot contain special characters.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel" for="SelectList">{{title}} Category:</td>
+                        <td>
+                            <select name="selectStockCategory" class="inputSelectBox" #selectList required
+                                name="category" formControlName="stockCategoryId" (change)="filterStockType()">
+                                <option *ngIf="!stockCategoryData || stockCategoryData.length == 0" required>No data
+                                </option>
+                                <option *ngIf="stockCategoryData && stockCategoryData.length > 0" value="" required>
+                                    Select a Category</option>
+                                <option *ngFor="let attribute of stockCategoryData" [value]="attribute.stockCategoryId">
+                                    {{attribute.stockCategoryName }}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel" for="SelectList">{{title}} Type:</td>
+                        <td class="centerContainer">
+                            <select name="selectStockType" class="inputSelectBox" #selectList required name="type"
+                                (mouseover)="tooltip.show()" formControlName="stockTypeId">
+                                <option
+                                    *ngIf="(!stockTypeDataCheck && !stockTypeData) || (stockTypeDataCheck.length == 0 && stockTypeData.length == 0)"
+                                    required>No data</option>
+                                <option *ngIf="stockTypeData && stockTypeData.length > 0" value="" required>Select a
+                                    Type</option>
+                                <option
+                                    *ngIf="stockTypeDataCheck && stockTypeDataCheck.length > 0 && addPriceForm.get('stockCategoryId')?.value == 0"
+                                    value="" required>Unavailable until category is selected
+                                </option>
+                                <option *ngFor="let attribute of stockTypeData" [value]="attribute.stockTypeId">
+                                    {{attribute.stockTypeName }}
+                                </option>
+                            </select>
+                            <mat-icon class="addIcon" matTooltip="Create a new stock type." #tooltip="matTooltip"
+                                [matTooltipPosition]="'right'" [matTooltipShowDelay]="2000" [matTooltipHideDelay]="1000"
+                                aria-label="Tooltip for help on dashboard" (click)="navigate()">add_circle</mat-icon>
+                        </td>
+                    </tr>
+                    <tr *ngIf="addForm.get('stockTypeId')?.touched && addForm.get('stockTypeId')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Please select a stock type.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Description:</td>
+                        <td><input type="text" required name="description" formControlName="stockDescription"></td>
+                    </tr>
+                    <tr
+                        *ngIf="addForm.get('stockDescription')?.touched && addForm.get('stockDescription')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="addForm.get('stockDescription')?.touched && addForm.get('stockDescription')?.hasError('specialChar')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot contain special characters.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Stock QTY:</td>
+                        <td><input class="inputNumberSelecter" type="number" min="0" #stockQTY required name="number"
+                                formControlName="qtyOnHand"></td>
+                    </tr>
+                    <tr *ngIf="addForm.get('qtyOnHand')?.touched && addForm.get('qtyOnHand')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr *ngIf="addForm.get('qtyOnHand')?.touched && addForm.get('qtyOnHand')?.hasError('min')">
+                        <td></td>
+                        <td class="errorMsg">Value cannot be less than 0</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Mininmum Reorder Threshold:</td>
+                        <td><input class="inputNumberSelecter" type="number" min="1" name="number1" required
+                                formControlName="minStockThreshold">
+                        </td>
+                    </tr>
+                    <tr
+                        *ngIf="addForm.get('minStockThreshold')?.touched && addForm.get('minStockThreshold')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="addForm.get('minStockThreshold')?.touched && addForm.get('minStockThreshold')?.hasError('min')">
+                        <td></td>
+                        <td class="errorMsg">Value must be greater than 0</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Maximum Reorder Threshold:</td>
+                        <td><input class="inputNumberSelecter" type="number" min="1" value="1" name="number2" required
+                                formControlName="maxStockThreshold">
+                        </td>
+                    </tr>
+                    <tr
+                        *ngIf="addForm.get('maxStockThreshold')?.touched && addForm.get('maxStockThreshold')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="addForm.get('maxStockThreshold')?.touched && addForm.get('maxStockThreshold')?.hasError('min')">
+                        <td></td>
+                        <td class="errorMsg">Value must be greater than 0</td>
+                    </tr>
+                </div>
+
+                <div formGroupName="addPriceForm">
+                    <tr scope="row" style="float: right;">
+                        <td class="lblInputLabel">Price:</td>
+                        <td><input type="number" min="1" #name required name="name" formControlName="price">
+                        </td>
+                    </tr>
+                    <tr *ngIf="addForm.get('price')?.touched && addForm.get('price')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr *ngIf="addForm.get('price')?.touched && addForm.get('price')?.hasError('min')">
+                        <td></td>
+                        <td class="errorMsg">Value must be greater than 0</td>
+                    </tr>
+                </div>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!parentForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div>
+  <h2 mat-dialog-title><strong>{{ data.serialNumber }}</strong></h2>
+  <div mat-dialog-content>
+    <div class="property">
+      <span class="label">Status:</span>
+      <span class="value">{{ data.printerStatus }}</span>
+    </div>
+    <div class="property">
+      <span class="label">Model Name:</span>
+      <span class="value">{{ data.printerModelName }}</span>
+    </div>
+    <div class="property">
+      <span class="label">Branch Name:</span>
+      <span class="value">{{ data.branchName }}</span>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true">Close</button>
+  </div>
+</div>

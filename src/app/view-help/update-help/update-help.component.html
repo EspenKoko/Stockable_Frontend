@@ -1,0 +1,46 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Update {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="editForm" (ngSubmit)="edit()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">FAQ Reference:</td>
+                    <td><input type="text" required formControlName="helpName"></td>
+                </tr>
+                <tr *ngIf="editForm.get('helpName')?.dirty && editForm.get('helpName')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="editForm.get('helpName')?.touched && editForm.get('helpName')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain special characters.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">FAQ Description:</td>
+                    <td><textarea style="white-space: pre-line;" name="description" formControlName="helpDescription"
+                            #description required></textarea></td>
+                </tr>
+                <tr
+                    *ngIf="editForm.get('helpDescription')?.dirty && editForm.get('helpDescription')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!editForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

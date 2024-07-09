@@ -1,0 +1,54 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="addForm" (ngSubmit)="Add()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Name:</td>
+                    <td><input type="text" required #name name="name"
+                            formControlName="stockTypeName"></td>
+                </tr>
+                <tr *ngIf="addForm.get('stockTypeName')?.touched && addForm.get('stockTypeName')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="addForm.get('stockTypeName')?.touched && addForm.get('stockTypeName')?.hasError('specialChar')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot contain special characters.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel" for="SelectList">Stock Category:</td>
+                    <td>
+                        <select name="selectStockType" class="inputSelectBox" #selectList required
+                            formControlName="stockCategoryId">
+                            <option *ngIf="!data || data.length == 0" required>No data</option>
+                            <option *ngIf="data && data.length > 0" value="" required>Select Category</option>
+                            <option *ngFor="let attribute of data" [value]="attribute.stockCategoryId">
+                                {{attribute.stockCategoryName}}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('stockCategoryId')?.touched && addForm.get('stockCategoryId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+            </table>
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!addForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

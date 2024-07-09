@@ -1,0 +1,58 @@
+<div class="viewPageBody">
+  <h2 class="lblHeader2">Technical Service Report {{data?.technicalServiceReportId}}</h2>
+
+  <div class="nonViewTableContainer">
+    <table class="nonViewTable table table-striped table-light">
+      <thead class="thead-dark">
+        <tr>
+          <th>#</th>
+          <th data-priority="1">Item</th>
+          <th data-priority="2">QTY</th>
+          <th data-priority="3">Unit price</th>
+          <th data-priority="4">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attribute of repairData, let i = index">
+          <td>{{i+1}}</td>
+          <td>{{attribute.stock.stockName}}</td>
+          <td>{{attribute.qty}}</td>
+          <td>{{attribute.price?.price | currency: 'R '}}</td>
+          <td>{{attribute.price?.price * attribute.qty | currency: 'R '}}</td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="VAT">
+        <tr>
+          <td colspan="3" class="text-center">Total exl VAT</td>
+          <td colspan="2" class="text-center">{{VATExclusiveTotal | currency: 'R '}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-center">{{VAT.vatPercent * 100 + "%"}} VAT</td>
+          <td colspan="2" class="text-center">{{VATAmount | currency: 'R '}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-center">Total Due </td>
+          <td colspan="2" class="text-center">{{VATAmount + VATExclusiveTotal | currency: 'R '}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-center">Technician Assigned: </td>
+          <td colspan="2" class="text-center">{{technician?.employee?.user?.userFirstName + " " + technician?.employee?.user?.userLastName}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-center">Repair Duration: </td>
+          <td colspan="2" class="text-center">{{data?.purchaseOrder?.repairTime}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-center">Repairs Done: </td>
+          <td colspan="2" class="text-center" style="white-space: pre-line;">{{data?.repairsDone}}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="btnReturnContainer">
+    <button class="btnReturn" (click)="back()">
+      <P class="btnReturnText">Return</P>
+    </button>
+  </div>
+</div>

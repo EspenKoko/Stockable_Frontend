@@ -1,0 +1,128 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Register {{title}} Request
+            <button type="button" class="btnToolHelp" matTooltip="User Creation is sent to ACS administators and verified before creation.
+            Users can take up to 3 working days to be created.
+            Created users will recieve an email with their created email and password." [matTooltipPosition]="'after'"
+                [matTooltipShowDelay]="500" [matTooltipHideDelay]="1000"
+                aria-label="Tooltip for help in user registration">
+                <P class="btnToolHelpPara">&#63;</P>
+            </button>
+        </h2>
+        <br>
+
+        <!-- modify table headers and rows accordingly -->
+        <form [formGroup]="addForm" class="inputTableContainter" (ngSubmit)="Add()">
+            <table class="CRUDTable table table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Name:</td>
+                    <td><input type="text" formControlName="name" placeholder="Bob" required></td>
+                </tr>
+                <tr *ngIf="addForm.get('name')?.touched && addForm.get('name')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="addForm.get('name')?.touched && addForm.get('name')?.hasError('whitespace')">
+                    <td></td>
+                    <td class="errorMsg">Field must not contain spaces or special characters.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Surname:</td>
+                    <td><input type="text" formControlName="surname" placeholder="John" required>
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('surname')?.touched && addForm.get('surname')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr *ngIf="addForm.get('surname')?.touched && addForm.get('surname')?.hasError('whitespace')">
+                    <td></td>
+                    <td class="errorMsg">Field must not contain spaces or special characters.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Email:</td>
+                    <td><input type="email" formControlName="email" placeholder="acsfintech@altron.co.za" required></td>
+                </tr>
+                <tr *ngIf="addForm.get('email')?.touched && addForm.get('email')?.hasError('required')"
+                    class="errorMsg">
+                    <td></td>
+                    <td>Field cannot be empty</td>
+                </tr>
+                <tr *ngIf="addForm.get('email')?.touched && addForm.get('email')?.hasError('email')" class="errorMsg">
+                    <td></td>
+                    <td>Invalid email address</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Contact Number:</td>
+                    <td><input type="text" formControlName="number" placeholder="011 546 8899" required></td>
+                </tr>
+                <tr *ngIf="addForm.get('number')?.touched && addForm.get('number')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty</td>
+                </tr>
+                <tr *ngIf="addForm.get('number')?.touched && addForm.get('number')?.hasError('pattern')">
+                    <td></td>
+                    <td class="errorMsg">Please enter a valid 10-digit number with 0 as the starting digit.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel" for="SelectList">{{ title }} Branch:</td>
+                    <td>
+                        <select name="selectClient" class="inputSelectBox" formControlName="branchId" required>
+                            <option *ngIf="!branchData || branchData.length == 0" required>No data</option>
+                            <option *ngIf="branchData && branchData.length > 0" value="" required>Select a branch
+                            </option>
+                            <option *ngFor="let attribute of branchData" [value]="attribute.branchId">{{
+                                attribute.branchName }}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('branchId')?.touched && addForm.get('branchId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please select a branch.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel" for="SelectList">Role:</td>
+                    <td>
+                        <select name="selectRole" class="inputSelectBox" formControlName="role" required>
+                            <option value="">Select a role</option>
+                            <option value="CLIENT_USER">Client User</option>
+                            <option value="CLIENT_ADMIN">Client Admin</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('role')?.touched && addForm.get('role')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Please select a role.</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel">Position:</td>
+                    <td><input type="text" formControlName="clientUserPosition" placeholder="Position at company"
+                            required></td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('clientUserPosition')?.touched && addForm.get('clientUserPosition')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+            </table>
+
+            <div class="buttonGroup">
+
+                <div class="btnReturnContainer">
+                    <button class="btnFormReturn" (click)="back()">
+                        <P class="btnReturnText">Return</P>
+                    </button>
+                </div>
+
+                <!-- modify click event according to values in table cells -->
+                <div class="btnSubmitContainer">
+                    <button class="btnFormSubmit" type="submit" [disabled]="!addForm.valid">
+                        <P class="btnSubmitText">Send Request</P>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="viewPageBody">
+    <br>
+    <h1 class="lblHeader2 card-title">Error Log</h1>
+    <br>
+
+    <div class="centerContainer">
+        <p>Owner: {{ ErrorForm.get('clientName')?.value || 'No Data' }}</p>
+        <br>
+        <p>Date Logged: {{ ErrorForm.get('errorLogDate')?.value | date:'dd/MM/yyyy' || 'No Data' }}</p>
+        <br>
+        <p>Serial Number: {{ ErrorForm.get('serialNumber')?.value || 'No Data' }}</p>
+        <br>
+        <p>Error Code: {{ ErrorForm.get('errorCodeName')?.value || 'No Data' }}</p>
+        <br>
+        <p>Additional Information:</p>
+        <p>{{ ErrorForm.get('errorLogDescription')?.value || 'No Data' }}</p>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" [routerLink]="['/diagnostic-checklist', data?.errorLogId]">
+            <P class="btnSubmitText">Begin Diagnostics</P>
+        </button>
+    </div>
+</div>

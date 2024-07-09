@@ -1,0 +1,73 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">{{title}} Management</h2>
+    <br>
+    <div class="headerSection row">
+        <label class="lblInputLabel col-5" for="searchCriteria">{{ title }} Name:</label>
+        <div class="searchBoxContainter col-7">
+            <input type="text" class="inputSearchBox" placeholder="Enter {{ title }} Name" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="GetUser()">
+        </div>
+    </div>
+    <br>
+
+    <!-- modify table headers and rows accordingly -->
+    <div class="viewTableContainer">
+        <table class="viewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Hire Date</th>
+                    <th scope="col">Employee type</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.userFirstName}}</td>
+                    <td>{{attribute.userLastName}}</td>
+                    <td>{{attribute.phoneNumber}}</td>
+                    <td>{{attribute.email}}</td>
+                    <td>{{attribute.employee?.empHireDate | date:'dd/MM/yyyy'}}</td>
+                    <td>{{attribute.employee?.employeeType.employeeTypeName}}</td>
+                    <td><button class="btn btn-primary"
+                            [routerLink]="['/update-employee', attribute.id]">Update</button></td>
+                    <!-- <td><button class="btn btn-danger" (click)="Delete(attribute.employeeId)">Delete</button></td> -->
+                    <td><button class="btn btn-danger"
+                            (click)="toggleConfirmButton(i, attribute.id)">{{attribute.confirmButton ? 'Confirm' :
+                            'Delete'}}</button></td>
+                </tr>
+            </tbody>
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled type="button"
+                        routerLink="/update-employee">Update</button></td>
+                <td><button class="btn btn-danger" disabled="disable">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" routerLink="/create-employee">
+            <P class="btnSubmitText">Add New {{title}}</P>
+        </button>
+    </div>
+</div>

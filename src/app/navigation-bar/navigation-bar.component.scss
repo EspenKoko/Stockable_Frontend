@@ -1,0 +1,111 @@
+//boostrap overwrite for manual styling
+/* ... */
+.navbar-collapse {
+   transition: height 0.3s ease-in-out;
+}
+
+.navbar-collapse.show {
+   height: auto;
+   /* Height expands to fit the content */
+   overflow: hidden;
+}
+/* ... */
+//boostrap overwrite for manual styling
+
+.CustomNavbar {
+   background: linear-gradient(120deg, rgb(7, 89, 98) 11.2%, rgb(0, 0, 0) 91.1%);
+   z-index: 100;
+}
+
+.navText {
+   width: fit-content;
+   color: white;
+   // color: orange;
+   // font-size: 19px; uncooment when using default font
+   transition: 1s;
+}
+
+.navText:hover {
+   color: orange;
+   // color: white;
+}
+
+.nav-item {
+   display: flex;
+   text-align: center;
+   justify-content: center;
+}
+
+.nav-divider {
+   padding-top: 1%;
+   color: white;
+   // color: orange;
+   text-align: center;
+   justify-content: center;
+}
+
+.navbar-toggler-icon {
+   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 165, 0, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+//change stroke to change the colour 
+
+//navbar logo
+.imgLogo {
+   height: 60px;
+   width: 100px;
+   overflow: hidden 
+}
+
+//navbar account icon
+#accountIconContainer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: row;
+   gap: 1rem;
+}
+
+.userAccountCircle {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.userAccountCircle:hover {
+   cursor: pointer;
+}
+
+.navProfilePicture{
+   width: 60px;
+   height: 60px;
+   border: 3px transparent solid;
+   border-radius: 50%;
+}
+
+.navProfilePicture:hover {
+   cursor: pointer;
+   border: 3px orange solid;
+   border-radius: 50%;
+}
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+   color: white;
+}
+
+.material-icons.md-light.md-inactive {
+   color: rgba(255, 255, 255, 0.3);
+}
+
+.material-icons {
+   font-size: 60px;
+   transition: 0.5s;
+   border: 3px transparent solid;
+   border-radius: 50%;
+}
+
+.material-icons:hover {
+   color: goldenrod;
+   border: 3px orange solid;
+   border-radius: 50%;
+}

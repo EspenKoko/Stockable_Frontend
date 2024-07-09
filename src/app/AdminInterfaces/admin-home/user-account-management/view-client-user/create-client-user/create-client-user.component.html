@@ -1,0 +1,154 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="parentForm" (ngSubmit)="register()">
+            <table class="CRUDTable table table-borderless">
+                <div formGroupName="registerForm">
+                    <tr scope="row">
+                        <td class="lblInputLabel">First Name:</td>
+                        <td><input type="text" formControlName="userFirstName" #name></td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('userFirstName')?.touched && registerForm.get('userFirstName')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('userFirstName')?.touched && registerForm.get('userFirstName')?.hasError('specialChar')">
+                        <td></td>
+                        <td class="errorMsg">Field must not contain spaces or special characters.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Last Name:</td>
+                        <td><input type="text" formControlName="userLastName" #surname></td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('userLastName')?.touched && registerForm.get('userLastName')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('userLastName')?.touched && registerForm.get('userLastName')?.hasError('specialChar')">
+                        <td></td>
+                        <td class="errorMsg">Field must not contain spaces or special characters.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Email:</td>
+                        <td><input type="email" formControlName="emailaddress" #email></td>
+                    </tr>
+                    <tr *ngIf="registerForm.get('emailaddress')?.touched && registerForm.get('emailaddress')?.hasError('required')"
+                        class="errorMsg">
+                        <td></td>
+                        <td>Field cannot be empty</td>
+                    </tr>
+                    <tr *ngIf="registerForm.get('emailaddress')?.touched && registerForm.get('emailaddress')?.hasError('email')"
+                        class="errorMsg">
+                        <td></td>
+                        <td>Invalid email address</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Contact Number:</td>
+                        <td><input type="text" formControlName="phoneNumber" #number></td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty</td>
+                    </tr>
+                    <tr
+                        *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.hasError('pattern')">
+                        <td></td>
+                        <td class="errorMsg">Please enter a valid 10-digit number with 0 as the starting digit.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel" for="SelectList">Role:</td>
+                        <td>
+                            <select class="inputSelectBox" formControlName="role" #selectList1>
+                                <option value="">Select a role</option>
+                                <option value="CLIENT_USER">Client User</option>
+                                <option value="CLIENT_ADMIN">Client Admin</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr *ngIf="registerForm.get('role')?.touched && registerForm.get('role')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Please select a role.</td>
+                    </tr>
+                </div>
+                <br>
+                <h3 class="lblHeader3" style="color: orange;">Occupation details section</h3>
+                <div formGroupName="clientUserForm">
+                    <tr scope="row">
+                        <td class="lblInputLabel" for="SelectList">{{title}} Firm:</td>
+                        <td>
+                            <select class="inputSelectBox" formControlName="clientId" #selectList2
+                                (change)="filterBranches()">
+                                <option *ngIf="!clientData || clientData.length == 0" required>No data</option>
+                                <option *ngIf="clientData && clientData.length > 0" value="" required>Select a Firm
+                                </option>
+                                <option *ngFor="let attribute of clientData" [value]="attribute.clientId">
+                                    {{attribute.clientName}}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr
+                        *ngIf="clientUserForm.get('clientId')?.touched && clientUserForm.get('clientId')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Please select a client.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel" for="SelectList">{{title}} Branch:</td>
+                        <td>
+                            <select class="inputSelectBox" formControlName="branchId" #selectList2>
+                                <option
+                                    *ngIf="(!branchDataCheck && !branchData) || (branchDataCheck.length == 0 && branchData.length == 0)"
+                                    required>No data</option>
+                                <option
+                                    *ngIf="branchDataCheck && branchDataCheck.length > 0 && clientUserForm.get('clientId')?.value == 0"
+                                    value="" required>Unavailable until client selected
+                                </option>
+                                <option *ngIf="clientUserForm.get('clientId')?.value > 0" value="" required>Select a
+                                    Branch
+                                </option>
+                                <option *ngFor="let attribute of branchData" [value]="attribute.branchId">
+                                    {{attribute.branchName}}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr
+                        *ngIf="clientUserForm.get('branchId')?.touched && clientUserForm.get('branchId')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Please select a branch.</td>
+                    </tr>
+                    <tr scope="row">
+                        <td class="lblInputLabel">Position:</td>
+                        <td><input type="text" formControlName="clientUserPosition" #position></td>
+                    </tr>
+                    <tr
+                        *ngIf="clientUserForm.get('clientUserPosition')?.touched && clientUserForm.get('clientUserPosition')?.hasError('required')">
+                        <td></td>
+                        <td class="errorMsg">Field cannot be empty.</td>
+                    </tr>
+                </div>
+
+            </table>
+
+            <div class="btnReturnContainer">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!parentForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

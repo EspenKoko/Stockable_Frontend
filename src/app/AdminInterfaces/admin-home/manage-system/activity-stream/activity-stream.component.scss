@@ -1,0 +1,23 @@
+.dateFilterSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.clearButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.inputSearchBox {
+    width: 300px;
+}
+
+.btnContinueText {
+    font-size: large;
+}

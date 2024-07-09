@@ -1,0 +1,23 @@
+<body id="body">
+
+  <app-navigation-bar *ngIf="service.isAuthenticated()"></app-navigation-bar>
+
+  <div class="loadingContainer" *ngIf="showLoader">
+    <app-loading-screen class="WaveLoaderContainer"></app-loading-screen>
+  </div>
+  
+  <router-outlet></router-outlet>
+
+  <!-- help button -->
+  <!-- <div class="btnHelpContainer">
+    <button class="btnHelp" (click)="triggerHelp()" *ngIf="service.isAuthenticated() && showHelpComponent">
+      <P class="btnHelpPara">&#63;</P>
+    </button>
+  </div> -->
+
+  <app-chat-support
+    *ngIf="service.isAuthenticated() && service.getUserRoles().includes('CLIENT_USER')
+    || service.isAuthenticated() && service.getUserRoles().includes('CLIENT_ADMIN')">
+  </app-chat-support>
+
+</body>

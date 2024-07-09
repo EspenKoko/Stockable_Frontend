@@ -1,0 +1,57 @@
+<div class="body">
+    <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <br>
+    <h1 class="lblHeader3 text-light">Frequently Asked Questions</h1>
+
+    <br>
+    <div class="headerSection row">
+        <div class="searchBoxContainter col-12">
+            <input type="text" class="inputSearchBox" placeholder="search question" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="GetFAQ()">
+        </div>
+    </div>
+
+    <div class="centerContainer row" *ngIf="helpData && helpData.length > 0">
+        <a class="helpCard col" *ngFor="let help of helpData" data-toggle="modal" data-target="#exampleModalLong"
+            (click)="expandHelp(help)"><span>{{help.helpName}}</span></a>
+    </div>
+
+    <div class="centerContainer row" *ngIf="!helpData || helpData.length == 0">
+        <h1 class="lblHeader2"> No results meet search criteria or <br />
+            No FAQs available at the moment. Please refresh page or check back later</h1>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLongTitle">{{FAQ?.helpName}}</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="font-size: 40px; color: white;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="white-space: pre-line;">
+                    <p style="font-size: x-large;">{{FAQ?.helpDescription}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" (click)="speak()">Voice Reader</button>
+                    <button class="btn btn-danger" (click)="stop()">Stop Reader</button>
+                    <h5>Contact Support for further assistance at 011 658 4369</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" type="submit" (click)="getHelpPdf()">
+            <P class="btnSubmitText">Help manual</P>
+        </button>
+    </div>
+</div>

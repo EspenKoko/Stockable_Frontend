@@ -1,0 +1,63 @@
+:root {
+    --form-control-color: rebeccapurple;
+    --form-control-disabled: #959495;
+}
+
+// .viewPageBody {
+//     display: flex;
+//     justify-content: center;
+//     text-align: center;
+//     flex-direction: column;
+//     padding-top: 220px;
+// }
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.divForm {
+    border-radius: 10px;
+    margin: 0 25% 0 25%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+form {
+    // display: grid;
+    // place-content: center;
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    flex-direction: column;
+    // width: 350px;
+    padding: 10% 0 10% 0;
+}
+
+.form-control {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.1;
+    width: 20rem;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 1em;
+    border: 0px transparent;
+    text-align: left;
+}
+
+//   .form-control--disabled {
+//     color: var(--form-control-disabled);
+//     cursor: not-allowed;
+//   }
+
+.btnSecondary {
+    background-color: red;
+}

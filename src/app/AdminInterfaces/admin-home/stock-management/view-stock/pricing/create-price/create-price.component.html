@@ -1,0 +1,53 @@
+<div class="card-body">
+    <div class="viewPageBody bg-light">
+        <br>
+        <h2 class="lblHeader2 card-title">Create {{title}}</h2>
+        <br>
+
+        <form class="inputTableContainter" [formGroup]="addForm" (ngSubmit)="Add()">
+            <table class="CRUDTable table table-borderless">
+                <tr scope="row">
+                    <td class="lblInputLabel">Price:</td>
+                    <td><input type="number" min="1" #name required name="name" formControlName="price">
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('price')?.touched && addForm.get('price')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+                <tr
+                    *ngIf="addForm.get('price')?.touched && addForm.get('price')?.hasError('min')">
+                    <td></td>
+                    <td class="errorMsg">Value must be greater than 0</td>
+                </tr>
+                <tr scope="row">
+                    <td class="lblInputLabel" for="SelectList">{{title}} For Stock:</td>
+                    <td>
+                        <select name="selectstock" class="inputSelectBox" #selectList required name="stock"
+                            formControlName="stockId">
+                            <option *ngIf="!data || data.length == 0" required>No data</option>
+                            <option *ngIf="data && data.length > 0" value="" required>Select a stock item</option>
+                            <option *ngFor="let attribute of data" [value]="attribute.stockId">{{attribute.stockName }}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr *ngIf="addForm.get('stockId')?.touched && addForm.get('stockId')?.hasError('required')">
+                    <td></td>
+                    <td class="errorMsg">Field cannot be empty.</td>
+                </tr>
+            </table>
+
+            <div class="btnReturnContainer" *ngIf="showComponent">
+                <button class="btnReturn" (click)="back()">
+                    <P class="btnReturnText">Return</P>
+                </button>
+            </div>
+
+            <div class="btnSubmitContainer">
+                <button class="btnSubmit" type="submit" [disabled]="!addForm.valid">
+                    <P class="btnSubmitText">Submit</P>
+                </button>
+            </div>
+        </form>
+    </div>

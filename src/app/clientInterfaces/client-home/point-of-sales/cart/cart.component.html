@@ -1,0 +1,89 @@
+<div class="container products-container">
+    <h2 class="lblHeader2 my-5">Items in cart</h2>
+
+    <!-- non crud view table- class currencyTable and currencytableContainer dont work for some reason despire having same properties -->
+    <div class="viewTableContainer">
+        <table class="viewTable table table-striped table-light">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Order</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"
+                        style="display: flex; flex-direction:row; text-align: center; justify-content: center;">
+                        Quantity</th>
+                    <th scope="col">Total Cost</th>
+                </tr>
+            </thead>
+
+            <tbody class="table-body" *ngIf="markup">
+                <tr *ngFor="let order of ordersInCart">
+                    <td>{{order.stock.stockName}}</td>
+                    <td>{{(order.price + (order.price * markup.markupPercent) + (order.price * VAT.vatPercent)) |
+                        currency: 'R '}}</td>
+                    <td style="display: flex; flex-direction:row; text-align: center; justify-content: center;">
+                        <mat-icon class="increase" (click)="reduceProdCount(order.stock)">chevron_left</mat-icon>
+                        {{order.quantity}}
+                        <mat-icon class="decrease" (click)="increaseProdCount(order.stock)">chevron_right</mat-icon>
+                    </td>
+                    <td>{{order.totalCost + (order.totalCost * markup.markupPercent) + (order.totalCost *
+                        VAT.vatPercent) | currency: 'R '}}</td>
+                </tr>
+            </tbody>
+
+            <tfoot class="table-footer" *ngIf="VAT">
+                <tr *ngIf="ordersInCart && ordersInCart.length > 0">
+                    <td></td>
+                    <td></td>
+                    <td style="display: flex; flex-direction:row; text-align: center; justify-content: center;">
+                        <b>Vat: {{VAT.vatPercent * 100 + '%'}}</b>
+                    </td>
+                    <td>{{totalCostOfOrdersInCart * VAT.vatPercent | currency: 'R '}}</td>
+                </tr>
+                <tr *ngIf="ordersInCart && ordersInCart.length > 0">
+                    <td></td>
+                    <td></td>
+                    <td style="display: flex; flex-direction:row; text-align: center; justify-content: center;">
+                        <b>Total:</b>
+                    </td>
+                    <td>{{totalCostOfOrdersInCart | currency: 'R '}}</td>
+                </tr>
+                <tr *ngIf="!ordersInCart || ordersInCart.length == 0">
+                    <td><strong>No</strong></td>
+                    <td><strong>Items</strong></td>
+                    <td><strong>In</strong></td>
+                    <td><strong>Cart</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <br>
+    <button type="button" class="btnToolHelp"
+        matTooltip="The table shows your products added from the cart.
+    You can modify the quantities by clicking the right arrow to increase the quantity and clicking the left arrow to decrease the quantity.
+    When done, you may proceed to checkout or clear the cart. Alternatively, you may return to the cart screen to add more items to the cart."
+        [matTooltipPosition]="'below'" [matTooltipShowDelay]="500" [matTooltipHideDelay]="1000"
+        aria-label="Tooltip for help in cart">
+        <P class="btnToolHelpPara">&#63;</P>
+    </button>
+
+    <br>
+
+    <div class="row">
+        <div class="col" style="height: 40px; display: flex; justify-content: center;">
+            <button class="btn btn-danger" (click)="cartManager.clearCart()">Clear Cart</button>
+        </div>
+
+        <div class="col" style="height: 40px; display: flex; justify-content: center;">
+            <button class="btn btn-primary" *ngIf="ordersInCart && ordersInCart.length != 0"
+                (click)="navigateToCheckout()">Proceed To Check Out</button>
+            <button class="btn btn-secondary" *ngIf="!ordersInCart || ordersInCart.length == 0"
+                (click)="navigateToCheckout()" disabled>Checkout Unavailable</button>
+        </div>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+</div>

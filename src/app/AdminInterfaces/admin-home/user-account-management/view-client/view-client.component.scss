@@ -1,0 +1,55 @@
+.btn btn-danger{
+    background-color: yellow;
+}
+
+//search bar
+.box {
+    position: relative;
+    // position: absolute;
+    // top: 100px;
+    // left: 5%;
+ }
+ 
+ .input {
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    background: none;
+    border: 4px solid orange;
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: rgba(255, 165, 0, 0.8);
+    outline: none;
+    transition: .5s;
+ }
+ 
+ .input:hover {
+    border: 4px solid gold;
+ 
+ }
+ 
+ .box:hover input {
+    width: 350px;
+    background: #3b3640;
+    border-radius: 10px;
+ }
+ 
+ .box .account {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+    color: orange;
+    transition: .2s;
+ }
+ 
+ .box:hover .account {
+    opacity: 0;
+    z-index: -1;
+ }
+ 
+ .account:hover~.col-1 .backIcon {
+    display: none;
+ }

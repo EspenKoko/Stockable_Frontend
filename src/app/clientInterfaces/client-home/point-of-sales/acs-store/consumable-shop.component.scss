@@ -1,0 +1,335 @@
+.cartLoader {
+   position: absolute;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+//Sidenavbar
+.sidenav {
+   height: 100%;
+   width: 0;
+   position: fixed;
+   z-index: 1;
+   top: 0;
+   left: 0;
+   background-color: #111;
+   overflow-x: hidden;
+   transition: 0.5s;
+
+   margin-top: 50px;
+}
+
+.navLinks {
+   padding-top: 100px;
+}
+
+.navLinks a {
+   cursor: pointer;
+}
+
+.sidenav a {
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
+   font-size: 25px;
+   color: orange;
+   display: block;
+   transition: 0.3s;
+}
+
+.sidenav a:hover {
+   color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+   position: absolute;
+   top: 90px;
+   right: 25px;
+   font-size: 36px;
+   margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+   .sidenav {
+      padding-top: 15px;
+   }
+
+   .sidenav a {
+      font-size: 18px;
+   }
+}
+
+.toolBar {
+   background-color: rgb(26, 27, 27);
+   position: sticky;
+   top: 0;
+   height: 75px;
+   z-index: 1;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+}
+
+//body
+.cartContainer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.lblHeader2 {
+   margin: 0;
+   gap: 10px;
+}
+
+.lblHeader2>span {
+   cursor: pointer;
+}
+
+.stockItemContainer {
+   margin: 25px 0 0 0;
+   padding: 5% 5% 5% 5%;
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   gap: 1rem;
+}
+
+.stockItem {
+   background-color: white;
+   border: 1px solid rgb(0, 0, 0);
+   border-radius: 10px;
+   padding: 2% 2% 2% 2%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   gap: 0.5rem;
+   height: 350px;
+   width: 250px;
+}
+
+
+/* Rules for using icons as white on a dark background. */
+.cartContainer .material-icons {
+   color: goldenrod;
+}
+
+.cartContainer .material-icons.md-light.md-inactive {
+   color: rgba(255, 255, 255, 0.3);
+}
+
+.cartContainer .material-icons {
+   font-size: 60px;
+   transition: 0.5s;
+   /* Preferred icon size */
+}
+
+.cartContainer .material-icons:hover {
+   cursor: pointer;
+   color: gold;
+}
+
+.burgerIcon {
+   font-size: 30px;
+   color: orange;
+   z-index: 999;
+}
+
+.burgerIcon:hover {
+   color: gold;
+   cursor: pointer;
+}
+
+.backIconContainter {
+   display: flex;
+   justify-content: center;
+   text-align: center;
+}
+
+.backIcon {
+   color: goldenrod;
+   height: auto;
+   width: auto;
+}
+
+.backIcon:hover {
+   color: gold;
+   cursor: pointer;
+}
+
+//buy now button
+.button {
+   --width: 100px;
+   --height: 35px;
+   --tooltip-height: 35px;
+   --tooltip-width: 90px;
+   --gap-between-tooltip-to-button: 18px;
+   --button-color: #222;
+   --tooltip-color: #fff;
+   width: var(--width);
+   height: var(--height);
+   background: var(--button-color);
+   position: relative;
+   text-align: center;
+   border-radius: 0.45em;
+   transition: background 0.3s;
+}
+
+.button::before {
+   position: absolute;
+   content: attr(data-tooltip);
+   width: var(--tooltip-width);
+   height: var(--tooltip-height);
+   background-color: #555;
+   font-size: 0.9rem;
+   color: #fff;
+   border-radius: .25em;
+   line-height: var(--tooltip-height);
+   bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
+   left: calc(50% - var(--tooltip-width) / 2);
+}
+
+.button::after {
+   position: absolute;
+   content: '';
+   width: 0;
+   height: 0;
+   border: 10px solid transparent;
+   border-top-color: #555;
+   left: calc(50% - 10px);
+   bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
+}
+
+.button::after,
+.button::before {
+   opacity: 0;
+   visibility: hidden;
+   transition: all 0.5s;
+}
+
+.text {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.button-wrapper,
+.text,
+.icon {
+   overflow: hidden;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   left: 0;
+   color: #fff;
+}
+
+.text {
+   top: 0
+}
+
+.text,
+.icon {
+   transition: top 0.5s;
+}
+
+.icon {
+   color: orange;
+   top: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.icon svg {
+   width: 24px;
+   height: 24px;
+}
+
+.button:hover {
+   background: #222;
+   cursor: pointer;
+}
+
+.button:hover .text {
+   top: -100%;
+}
+
+.button:hover .icon {
+   top: 0;
+}
+
+// .button:hover:before,
+// .button:hover:after {
+//    opacity: 1;
+//    visibility: visible;
+// }
+
+// .button:hover:after {
+//    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+// }
+
+// .button:hover:before {
+//    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+// }
+
+//search bar
+.box {
+   position: relative;
+}
+
+.input {
+   padding: 10px;
+   width: 60px;
+   height: 60px;
+   background: none;
+   border: 4px solid rgba(255, 165, 0, 0.8);
+   border-radius: 50px;
+   box-sizing: border-box;
+   font-size: 20px;
+   color: rgba(255, 165, 0, 0.8);
+   outline: none;
+   transition: .5s;
+}
+
+.input:hover {
+   border: 4px solid gold;
+
+}
+
+.box:hover input {
+   width: 200px;
+   background: #3b3640;
+   border-radius: 10px;
+}
+
+.box .account {
+   position: absolute;
+   top: 50%;
+   right: 5px;
+   transform: translate(-50%, -50%);
+   font-size: 26px;
+   color: rgba(255, 165, 0, 0.8);
+   transition: .2s;
+}
+
+.box:hover .account {
+   opacity: 0;
+   z-index: -1;
+}
+
+.account:hover~.col-1 .backIcon {
+   display: none;
+}
+
+.stockIcon {
+   height: auto;
+   width: 100px;
+   font-size: 100px;
+}

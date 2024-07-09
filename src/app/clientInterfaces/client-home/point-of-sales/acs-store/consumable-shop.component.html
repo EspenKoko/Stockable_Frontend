@@ -1,0 +1,74 @@
+<div id="mySidenav" class="sidenav">
+    <div class="navLinks">
+        <a href="javascript:void(0)" id="closebtn" class="closebtn" (click)="closeNav()">&times;</a>
+        <a (click)="filterNav($event)">Filter</a>
+        <a (click)="sortNav()">Sort</a>
+        <router-outlet class="navBody"></router-outlet>
+    </div>
+</div>
+
+<div class="toolBar">
+    <!-- <span class="burgerIcon col-1" (click)="openNav()">&#9776;</span> -->
+    <span class="backIconContainter col-2">
+        <mat-icon class="backIcon" (click)="back()">exit_to_app</mat-icon>
+    </span>
+
+    <!-- change col-3 into col-2 when above code is uncommented -->
+    <div class="btnSearchContainter col-1">
+        <div class="box">
+            <form name="search">
+                <input type="text" class="input" name="searchCriteria" onmouseout="this.value = ''; this.blur();"
+                    [(ngModel)]="searchTerm" (keyup)="getStock()">
+            </form>
+            <span class="account material-icons md-light">search</span>
+        </div>
+    </div>
+
+    <h1 class="lblHeader2 card-title col-7" (click)="GetStocks()">
+        <span>ACS Store</span>
+        <button type="button" class="btnToolHelp" matTooltip="Welcome to the ACS store. You can purchase parts or consumables for your printer here
+        or alternatively purchase a new printer. Purchases take up to 10 working days to be sent.
+        You can make use of the search funtion in the store navbar to find a specific product. Clicking the 'ACS Store' header will refresh the when you need.
+        items will be added to the cart when you click 'Add To Cart'." [matTooltipPosition]="'below'"
+            [matTooltipShowDelay]="500" [matTooltipHideDelay]="1000" aria-label="Tooltip for help in store">
+            <P class="btnToolHelpPara">&#63;</P>
+        </button>
+    </h1>
+
+    <div class="cartContainer col-2" (click)="navigateToCart()">
+        <span class="material-icons">shopping_cart</span>
+        <span style="color: goldenrod; font-size: x-large; border-radius: 50%;"><strong>{{cartItems}}</strong></span>
+    </div>
+</div>
+
+<div id="stockItemContainer" class="stockItemContainer" *ngIf="VAT && markup">
+    <div class="stockItem" *ngFor="let item of stock">
+        <!-- <img class="imgLogo" src={{item.image}} alt="product image" height="100" width="150"> -->
+        <mat-icon *ngIf="item.stockType.stockCategoryId == 1" class="stockIcon">description</mat-icon>
+        <mat-icon *ngIf="item.stockType.stockCategoryId == 2" class="stockIcon">build</mat-icon>
+        <mat-icon *ngIf="item.stockType.stockCategoryId == 3" class="stockIcon">printer</mat-icon>
+        <h5>{{item.stockName}}</h5>
+        <p>{{item.stockDescription}}</p>
+        <p>{{((item.price?.price) + (item.price?.price * markup.markupPercent) + (item.price?.price * VAT.vatPercent) |
+            currency: 'R ') || 'TBP'}}</p>
+
+        <div class="button addToCartToolTip" (click)="addToCart(item)" #toolTip data-toggle="tooltip"
+            title="Add this item to cart" data-placement="top">
+            <div class="button-wrapper">
+                <div class="text">Add To Cart</div>
+                <span class="icon">
+                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
+                        </path>
+                    </svg>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="cartLoader">
+    <app-cart-loading-screen></app-cart-loading-screen>
+</div>

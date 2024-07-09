@@ -1,0 +1,93 @@
+<div class="viewPageBody">
+    <br>
+    <h2 class="lblHeader2 card-title">{{title}} Item Management</h2>
+    <br>
+    <div class="headerSection row">
+        <label class="lblInputLabel col-5" for="searchCriteria">{{ title }} Name:</label>
+        <div class="searchBoxContainter col-7">
+            <input type="text" class="inputSearchBox" placeholder="Enter {{ title }} Name" [(ngModel)]="searchTerm"
+                name="searchCriteria" (keyup)="GetStock()">
+        </div>
+    </div>
+    <br>
+
+    <div class="viewTableContainer">
+        <table class="viewTable table table-striped table-light table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 4%;">#</th>
+                    <th scope="col">Stock Name</th>
+                    <th scope="col">Stock category</th>
+                    <th scope="col">Stock type</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Unit price</th>
+                    <th scope="col">QTY On Hand</th>
+                    <th scope="col">Min Reorder Threshold</th>
+                    <th scope="col">Max Reorder Threshold</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="data && data.length > 0">
+                <tr scope="row" *ngFor="let attribute of data, let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{attribute.stockName}}</td>
+                    <td>{{attribute.stockType.stockCategory.stockCategoryName}}</td>
+                    <td>{{attribute.stockType.stockTypeName}}</td>
+                    <td>{{attribute.stockDescription}}</td>
+                    <td>{{attribute.price?.price | currency: 'R '}}</td>
+                    <td>
+                        <p id="colourChecker"
+                            [ngStyle]="getColorStyle(attribute.qtyOnHand, attribute.minStockThreshold, attribute.maxStockThreshold )">
+                            {{attribute.qtyOnHand}}</p>
+                    </td>
+                    <td>{{attribute.minStockThreshold}}</td>
+                    <td>{{attribute.maxStockThreshold}}</td>
+                    <td><button class="btn btn-primary"
+                            [routerLink]="['/update-stock', attribute.stockId]">Update</button></td>
+                    <!-- <td><button class="btn btn-danger" (click)="Delete(attribute.stockId)">Delete</button></td> -->
+                    <td><button class="btn btn-danger"
+                            (click)="toggleConfirmButton(i, attribute.stockId)">{{attribute.confirmButton ? 'Confirm' :
+                            'Delete'}}</button></td>
+                </tr>
+            </tbody>
+            <tr *ngIf="!data || data.length == 0">
+                <td>#</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td>No Data</td>
+                <td><button class="btn btn-secondary" disabled type="button" routerLink="/update-stock">Update</button>
+                </td>
+                <td><button class="btn btn-danger" disabled="disabled">Delete</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btnReturnContainer">
+        <button class="btnReturn" (click)="back()">
+            <P class="btnReturnText">Return</P>
+        </button>
+    </div>
+
+    <!-- <div class="btnSubmitContainer">
+        <button class="btnStockTake" routerLink="/stock-take">
+            <P class="btnSubmitText">Stock take</P>
+        </button>
+    </div> -->
+
+    <div class="btnSubmitContainer">
+        <button class="btnPricing" routerLink="/pricing">
+            <P class="btnSubmitText">Pricing</P>
+        </button>
+    </div>
+
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" routerLink="/create-stock">
+            <P class="btnSubmitText">Add New {{title}}</P>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="viewPageBody">
+    <h2 class="lblHeader2 card-title">Update {{title}}</h2>
+
+    <br>
+    <br>
+
+    <!-- modify table headers and rows accordingly -->
+    <!-- <form class="inputTableContainter" [formGroup]="editForm" #form="ngForm" (ngSubmit)="edit()"> -->
+        <form class="inputTableContainter" [formGroup]="editForm" (ngSubmit)="validate(name, surname, number, email, position)">
+        <table class="CRUDTable table table-borderless">
+            <tr scope="row">
+                <td class="lblInputLabel">First Name:</td>
+                <td><input #name type="text" required formControlName="hubUserName"></td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel">Last Name:</td>
+                <td><input #surname type="text" required formControlName="hubUserSurname"></td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel">Contact Number:</td>
+                <td><input #number type="text" required formControlName="hubUserNumber"></td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel">Email Address:</td>
+                <td><input class="inputTextBox"#email type="email" required formControlName="hubUserEmail"></td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel">Position:</td>
+                <td><input class="inputTextBox"#position type="text" required formControlName="hubUserPosition"></td>
+            </tr>
+            <tr scope="row">
+                <td class="lblInputLabel" for="SelectList">{{title}} Works for:</td>
+                <td>
+                    <select name="selecthub" class="inputSelectBox" #selectList
+                        required name="type" formControlName="hubId">
+                        <option *ngIf="!data || data.length == 0" required>No data</option>
+                        <option *ngFor="let attribute of data" [value]="attribute.hubId">{{attribute.hubName }}
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+    <div class="btnReturnContainer">
+    <button class="btnReturn" (click)="back()">
+        <P class="btnReturnText">Return</P>
+    </button>
+</div>
+
+        <!-- modify click event according to values in table cells -->
+    <div class="btnSubmitContainer">
+        <button class="btnSubmit" type="submit">
+            <P class="btnSubmitText">Submit</P>
+        </button>
+    </div>
+</form>
+</div>

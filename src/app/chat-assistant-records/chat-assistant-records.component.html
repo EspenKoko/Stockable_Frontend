@@ -1,0 +1,36 @@
+<div class="viewPageBody">
+  <br>
+  <h1 class="lblHeader2">Live support history</h1>
+  <br>
+  <div class="nonViewTableContainer">
+    <table class="nonViewTable table table-striped table-light">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Type</th>
+          <th scope="col">Message</th>
+          <th scope="col">Timestamp</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="messages && messages.length > 0">
+        <tr scope="row" *ngFor="let message of messages, let i = index">
+          <td>{{i+1}}</td>
+          <td>{{message.type}}</td>
+          <td>{{message.message}}</td>
+          <td>{{message.date | date: 'dd/MM/yyy hh:mm:ss'}}</td>
+        </tr>
+      </tbody>
+        <tr *ngIf="!messages || messages.length == 0">
+          <td>#</td>
+          <td>No Data</td>
+          <td>No Data</td>
+          <td>No Data</td>
+        </tr>
+    </table>
+  </div>
+  <div class="btnReturnContainer">
+    <button class="btnReturn" routerLink="/user-account-management">
+      <P class="btnReturnText">Return</P>
+    </button>
+  </div>
+</div>
